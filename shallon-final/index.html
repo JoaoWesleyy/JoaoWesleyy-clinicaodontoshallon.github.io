@@ -1,0 +1,2205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shallon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue-deep: #0a1f3c;
+      --blue-mid: #0e3a6e;
+      --blue-soft: #1a5ea8;
+      --blue-light: #3b82d4;
+      --blue-pale: #d0e6f9;
+      --blue-glass: rgba(14, 58, 110, 0.12);
+      --white: #ffffff;
+      --white-warm: #f4f8fd;
+      --gold: #c4a96a;
+      --text-main: #0a1f3c;
+      --text-muted: #4a6080;
+      --font-display: 'Poppins', sans-serif;
+      --font-title: 'Poppins', sans-serif;
+      --font-body: 'Poppins', sans-serif;
+      --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 20px;
+      background: var(--white);
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
+
+
+
+    /* ─── NAV ─────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 22px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s, padding 0.4s, box-shadow 0.4s;
+    }
+
+    nav.scrolled {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(16px);
+      padding: 0px 60px;
+      box-shadow: 0 2px 30px rgba(10, 31, 60, 0.08);
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.4s;
+    }
+
+    nav.scrolled .logo {
+      color: var(--blue-deep);
+    }
+
+    .logo span {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .logo-img {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo-img img {
+      height: 68px;
+      width: auto;
+      max-width: 200px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      transition: filter 0.4s, opacity 0.3s;
+    }
+
+    nav.scrolled .logo-img img {
+      filter: none;
+    }
+
+    .footer-logo-img {
+      height: 60px;
+      width: auto;
+      max-width: 190px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.88);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    nav.scrolled .nav-links a {
+      color: var(--text-muted);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.35s var(--ease-smooth);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold) !important;
+    }
+
+    .nav-cta {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--white) !important;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      padding: 10px 22px;
+      border-radius: 40px;
+      text-decoration: none;
+      transition: background 0.3s, border-color 0.3s, color 0.3s !important;
+    }
+
+    nav.scrolled .nav-cta {
+      color: var(--blue-soft) !important;
+      border-color: var(--blue-soft);
+    }
+
+    .nav-cta:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--white) !important;
+    }
+
+    /* ─── HERO ────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(140deg, rgba(10, 31, 60, 0.82) 0%, rgba(14, 58, 110, 0.75) 55%, rgba(26, 94, 168, 0.65) 100%), url('images/hero-bg.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0 60px;
+    }
+
+    .hero-bg-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 70% 30%, rgba(59, 130, 212, 0.25) 0%, transparent 55%),
+        radial-gradient(circle at 20% 80%, rgba(196, 169, 106, 0.12) 0%, transparent 45%);
+    }
+
+    .hero-grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+    }
+
+    .hero-eyebrow {
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 35px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s var(--ease-smooth) 0.3s forwards;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 8.5rem);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 28px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.9s var(--ease-smooth) 0.5s forwards;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--blue-pale);
+    }
+
+    .hero-sub {
+      font-size: 1.35rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.72);
+      max-width: 480px;
+      margin-bottom: 48px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s var(--ease-smooth) 0.7s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s var(--ease-smooth) 0.9s forwards;
+    }
+
+    .btn-primary {
+      background: var(--white);
+      color: var(--blue-deep);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s var(--ease-spring), box-shadow 0.3s;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    }
+
+    .btn-primary:hover {
+      background: var(--gold);
+      color: var(--white);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(196, 169, 106, 0.35);
+    }
+
+    .btn-outline {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.82);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.3s;
+    }
+
+    .btn-outline:hover {
+      color: var(--gold);
+    }
+
+    .btn-outline .play-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.3s;
+    }
+
+    .btn-outline:hover .play-icon {
+      border-color: var(--gold);
+    }
+
+    .play-icon svg {
+      fill: currentColor;
+      margin-left: 3px;
+      width: 12px;
+    }
+
+    /* floating card */
+    .hero-card {
+      position: absolute;
+      right: 8%;
+      bottom: 12%;
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 28px 32px;
+      display: flex;
+      gap: 32px;
+      opacity: 0;
+      transform: translateX(40px);
+      animation: fadeLeft 1s var(--ease-smooth) 1.1s forwards;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat .num {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .hero-stat .label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+      margin-top: 6px;
+    }
+
+    .hero-stat .num span {
+      color: var(--gold);
+    }
+
+    /* scroll indicator */
+    .scroll-down {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      animation: bounce 2.2s ease-in-out infinite;
+    }
+
+    .scroll-down svg {
+      width: 18px;
+      opacity: 0.5;
+    }
+
+    /* ─── ANIMATIONS ──────────────────────────────── */
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeLeft {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(8px);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes lineGrow {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 64px;
+      }
+    }
+
+    /* ─── SECTION SHARED ──────────────────────────── */
+    section {
+      padding: 50px 60px;
+    }
+
+    .section-label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 4vw, 5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--blue-deep);
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--blue-soft);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s var(--ease-smooth), transform 0.8s var(--ease-smooth);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── SOBRE ───────────────────────────────────── */
+    #sobre {
+      background: var(--white-warm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #sobre::before {
+      content: 'SHALLON';
+      position: absolute;
+      right: -40px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-display);
+      font-size: 18vw;
+      font-weight: 700;
+      color: rgba(14, 58, 110, 0.04);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .sobre-img {
+      position: relative;
+    }
+
+    .sobre-img-main {
+      width: 100%;
+      aspect-ratio: 5/4;
+      border-radius: 24px;
+      background: linear-gradient(160deg, var(--blue-mid), var(--blue-light));
+      overflow: hidden;
+      position: relative;
+    }
+
+    .sobre-img-main svg {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      opacity: 0.18;
+    }
+
+    .sobre-img-badge {
+      position: absolute;
+      bottom: -24px;
+      right: -24px;
+      background: var(--white);
+      border-radius: 20px;
+      padding: 22px 26px;
+      box-shadow: 0 20px 60px rgba(10, 31, 60, 0.14);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .sobre-img-badge .badge-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--blue-deep);
+      line-height: 1;
+    }
+
+    .sobre-img-badge .badge-num span {
+      color: var(--gold);
+    }
+
+    .sobre-img-badge .badge-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .sobre-content {
+      padding: 20px 0;
+    }
+
+    .sobre-content .section-title {
+      margin-bottom: 28px;
+    }
+
+    .sobre-text {
+      font-size: 1.2rem;
+      line-height: 2;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+
+    .sobre-features {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .feature-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--blue-soft), var(--blue-light));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feature-icon svg {
+      width: 20px;
+      stroke: white;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .feature-info h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--blue-deep);
+      margin-bottom: 4px;
+    }
+
+    .feature-info p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ─── SERVIÇOS ────────────────────────────────── */
+    #servicos {
+      background: var(--white-warm);
+
+    }
+
+    .servicos-header {
+      max-width: 600px;
+      margin-bottom: 64px;
+    }
+
+    .servicos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .servico-card {
+      border: none;
+      border-radius: 20px;
+      padding: 40px 32px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.4s var(--ease-spring), box-shadow 0.4s;
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    /* dark overlay always visible */
+    .servico-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10, 31, 60, 0.88) 0%, rgba(10, 31, 60, 0.45) 55%, rgba(10, 31, 60, 0.2) 100%);
+      transition: background 0.4s;
+      z-index: 0;
+    }
+
+    .servico-card:hover::before {
+      background: linear-gradient(to top, rgba(14, 58, 110, 0.95) 0%, rgba(14, 58, 110, 0.7) 55%, rgba(26, 94, 168, 0.4) 100%);
+    }
+
+    .servico-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 28px 60px rgba(10, 31, 60, 0.28);
+    }
+
+    .servico-card:hover .servico-title,
+    .servico-card:hover .servico-desc,
+    .servico-card:hover .servico-num {
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .servico-card:hover .servico-icon svg {
+      stroke: rgba(255, 255, 255, 0.95);
+    }
+
+    .servico-card>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    .servico-num {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.12);
+      line-height: 1;
+      margin-bottom: 20px;
+      transition: color 0.4s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .servico-icon {
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .servico-icon svg {
+      width: 28px;
+      stroke: rgba(255, 255, 255, 0.8);
+      fill: none;
+      stroke-width: 1.8;
+      transition: stroke 0.4s;
+    }
+
+    .servico-title {
+      font-family: var(--font-display);
+      font-size: 2.1rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 12px;
+      line-height: 1.2;
+      transition: color 0.4s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .servico-desc {
+      font-size: 1.08rem;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.85);
+      transition: color 0.4s;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── DEPOIMENTOS ─────────────────────────────── */
+    #depoimentos {
+      background: linear-gradient(160deg, var(--blue-deep) 0%, var(--blue-mid) 100%);
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    #depoimentos .section-label {
+      color: var(--gold);
+    }
+
+    #depoimentos .section-label::before {
+      background: var(--gold);
+    }
+
+    #depoimentos .section-title {
+      color: var(--white);
+    }
+
+    #depoimentos .section-title em {
+      color: var(--blue-pale);
+    }
+
+    .dep-bg {
+      position: absolute;
+      right: -100px;
+      top: -100px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 212, 0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .dep-slider-wrap {
+      position: relative;
+      margin-top: 60px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .dep-track {
+      display: flex;
+      gap: 28px;
+      transition: transform 0.6s var(--ease-smooth);
+      width: 100%;
+    }
+
+    .dep-card {
+      min-width: calc((100% - 56px) / 3);
+      max-width: calc((100% - 56px) / 3);
+      box-sizing: border-box;
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 36px;
+      flex-shrink: 0;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .dep-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    .dep-stars {
+      color: var(--gold);
+      font-size: 1rem;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+    }
+
+    .dep-text {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.75;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 28px;
+    }
+
+    .dep-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .dep-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-soft), var(--gold));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .dep-name {
+      font-size: 0.96rem;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    .dep-role {
+      font-size: 0.76rem;
+      color: rgba(255, 255, 255, 0.45);
+      letter-spacing: 0.06em;
+    }
+
+    .dep-controls {
+      display: flex;
+      gap: 12px;
+      margin-top: 40px;
+      justify-content: center;
+    }
+
+    .dep-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: background 0.3s, width 0.3s, border-radius 0.3s;
+    }
+
+    .dep-dot.active {
+      background: var(--gold);
+      width: 28px;
+      border-radius: 4px;
+    }
+
+    #contato {
+      background: var(--white-warm);
+    }
+
+    .contato-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contato-info {
+      padding-top: 12px;
+    }
+
+    .contato-info .section-title {
+      margin-bottom: 24px;
+    }
+
+    .contato-info p {
+      font-size: 1.2rem;
+      line-height: 1.95;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+
+    .contact-items {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .contact-icon {
+      width: 46px;
+      height: 46px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--blue-soft), var(--blue-light));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-icon svg {
+      width: 18px;
+      stroke: white;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .contact-item-info strong {
+      display: block;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .contact-item-info span {
+      font-size: 1.1rem;
+      color: var(--blue-deep);
+      font-weight: 400;
+    }
+
+    .contato-form {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 42px;
+      box-shadow: 0 20px 60px rgba(10, 31, 60, 0.07);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .contato-form .form-group,
+    .contato-form .form-row {
+      width: 100%;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--blue-deep);
+      background: var(--white-warm);
+      border: 1.5px solid rgba(14, 58, 110, 0.1);
+      border-radius: 12px;
+      padding: 14px 18px;
+      outline: none;
+      resize: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--blue-soft);
+      box-shadow: 0 0 0 4px rgba(26, 94, 168, 0.08);
+    }
+
+    .form-group textarea {
+      min-height: 130px;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 17px;
+      background: linear-gradient(135deg, var(--blue-mid), var(--blue-soft));
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.3s var(--ease-spring), box-shadow 0.3s;
+      margin-top: 8px;
+    }
+
+    .form-submit:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(14, 58, 110, 0.28);
+    }
+
+    .form-note {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      color: var(--blue-soft);
+      font-size: 1rem;
+      font-family: var(--font-display);
+      font-style: italic;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────── */
+    footer {
+      background: var(--blue-deep);
+      padding: 60px 60px 36px;
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      gap: 40px;
+    }
+
+    .footer-brand .logo {
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .footer-brand .footer-logo-img {
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.4);
+      max-width: 260px;
+      line-height: 1.7;
+    }
+
+    .footer-links h5 {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      margin-bottom: 18px;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.55);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 28px;
+    }
+
+    .footer-bottom p {
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 14px;
+    }
+
+    .social-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s, border-color 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .social-btn:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .social-btn svg {
+      width: 14px;
+      stroke: rgba(255, 255, 255, 0.6);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .social-btn:hover svg {
+      stroke: white;
+    }
+
+    /* ─── WHATSAPP FLOAT ──────────────────────────── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 36px;
+      right: 36px;
+      z-index: 200;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #25D366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 28px rgba(37, 211, 102, 0.4);
+      cursor: pointer;
+      transition: transform 0.3s var(--ease-spring), box-shadow 0.3s;
+      text-decoration: none;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.12) translateY(-4px);
+      box-shadow: 0 16px 40px rgba(37, 211, 102, 0.5);
+    }
+
+    .whatsapp-float svg {
+      width: 26px;
+      fill: white;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────── */
+    /* ─── HAMBURGER ───────────────────────────────── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 200;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform 0.35s, opacity 0.3s, background 0.4s;
+    }
+
+    nav.scrolled .hamburger span {
+      background: var(--blue-deep);
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* mobile nav drawer */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--blue-deep);
+      z-index: 150;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s var(--ease-smooth);
+    }
+
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-menu a {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.3s;
+    }
+
+    .mobile-menu a:hover {
+      color: var(--gold);
+    }
+
+    .mobile-menu .mob-cta {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white) !important;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 14px 36px;
+      border-radius: 50px;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .mobile-menu .mob-cta:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    /* ─── TABLET (≤1024px) ────────────────────────── */
+    @media (max-width: 1024px) {
+      nav {
+        padding: 20px 32px;
+      }
+
+      nav.scrolled {
+        padding: 10px 28px;
+      }
+
+      section {
+        padding: 80px 32px;
+      }
+
+      .sobre-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .sobre-img {
+        max-width: 100%;
+      }
+
+      .sobre-img-main {
+        aspect-ratio: 16/9;
+      }
+
+      .sobre-img-badge {
+        bottom: -20px;
+        right: 16px;
+      }
+
+      .servicos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .dep-card {
+        min-width: calc(50% - 14px);
+        max-width: calc(50% - 14px);
+        padding: 26px;
+        box-sizing: border-box;
+      }
+
+      .contato-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .hero-card {
+        display: none;
+      }
+
+      footer {
+        padding: 48px 32px 28px;
+      }
+
+      .footer-top {
+        flex-wrap: wrap;
+        gap: 32px;
+      }
+    }
+
+    /* ─── MOBILE (≤768px) ─────────────────────────── */
+    @media (max-width: 768px) {
+      nav {
+        padding: 18px 20px;
+      }
+
+      nav.scrolled {
+        padding: 5px 15px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .mobile-menu {
+        display: flex;
+      }
+
+      section {
+        padding: 56px 18px;
+      }
+
+      #hero {
+        padding: 100px 18px 50px;
+        min-height: 50svh;
+        align-items: flex-start;
+      }
+
+      .hero-eyebrow {
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+      }
+
+      .hero-title {
+        font-size: clamp(1.9rem, 7.5vw, 2.6rem);
+        line-height: 1.2;
+        margin-bottom: 16px;
+      }
+
+      .hero-sub {
+        font-size: 0.85rem;
+        line-height: 1.7;
+        margin-bottom: 28px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+
+      .btn-primary {
+        width: 100%;
+        text-align: center;
+        padding: 14px;
+      }
+
+      .btn-outline {
+        justify-content: center;
+      }
+
+      .scroll-down {
+        display: none;
+      }
+
+      .section-title {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+      }
+
+      .section-label {
+        font-size: 0.7rem;
+      }
+
+      .sobre-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .sobre-img-main {
+        aspect-ratio: 4/3;
+      }
+
+      .sobre-img-badge {
+        padding: 14px 18px;
+        bottom: -14px;
+        right: 10px;
+      }
+
+      .sobre-img-badge .badge-num {
+        font-size: 1.3rem;
+      }
+
+      .sobre-text {
+        font-size: 0.9rem;
+      }
+
+      .feature-info h4 {
+        font-size: 0.88rem;
+      }
+
+      .feature-info p {
+        font-size: 0.82rem;
+      }
+
+      .servicos-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .servico-card {
+        padding: 24px 20px;
+        min-height: 240px;
+      }
+
+      .servico-title {
+        font-size: 1.3rem;
+      }
+
+      .servico-desc {
+        font-size: 0.82rem;
+      }
+
+      .servico-num {
+        font-size: 2.5rem;
+        margin-bottom: 12px;
+      }
+
+      #depoimentos {
+        padding: 48px 18px;
+      }
+
+      .dep-slider-wrap {
+        margin-top: 24px;
+      }
+
+      .dep-controls {
+        margin-top: 16px;
+      }
+
+      .dep-card {
+        min-width: 100%;
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 18px 16px;
+        border-radius: 12px;
+        word-wrap: break-word;
+        overflow: hidden;
+      }
+
+      .dep-text {
+        font-size: 0.82rem;
+        line-height: 1.6;
+        margin-bottom: 12px;
+      }
+
+      .dep-stars {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+      }
+
+      .dep-avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 0.85rem;
+      }
+
+      .dep-name {
+        font-size: 0.75rem;
+      }
+
+      .dep-role {
+        font-size: 0.62rem;
+      }
+
+      .contato-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .contato-info p {
+        font-size: 0.88rem;
+      }
+
+      .contact-item-info span {
+        font-size: 0.88rem;
+      }
+
+      .contato-form {
+        padding: 24px 16px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .footer-top {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .footer-links {
+        width: 100%;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+
+      footer {
+        padding: 36px 18px 20px;
+      }
+
+      .whatsapp-float {
+        bottom: 18px;
+        right: 18px;
+        width: 48px;
+        height: 48px;
+      }
+
+      .whatsapp-float svg {
+        width: 20px;
+      }
+
+      #sobre::before {
+        font-size: 28vw;
+      }
+    }
+
+    /* ─── SMALL MOBILE (≤400px) ───────────────────── */
+    @media (max-width: 400px) {
+      .hero-title {
+        font-size: 2.2rem;
+      }
+
+      .hero-eyebrow {
+        font-size: 0.82rem;
+      }
+
+      .logo {
+        font-size: 1.6rem;
+      }
+
+      .servico-card {
+        padding: 22px 18px;
+      }
+
+      .dep-text {
+        font-size: 1rem;
+      }
+
+      .mobile-menu a {
+        font-size: 1.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- WhatsApp float -->
+  <a class="whatsapp-float" href="https://wa.me/5500000000000" target="_blank" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20.52 3.48A11.89 11.89 0 0012.05.01C5.46.01.14 5.33.14 11.93c0 2.1.55 4.15 1.59 5.96L.1 24l6.28-1.65a11.9 11.9 0 005.67 1.44h.01c6.58 0 11.9-5.33 11.9-11.93 0-3.18-1.24-6.17-3.49-8.43zm-8.47 18.34h-.01a9.88 9.88 0 01-5.04-1.37l-.36-.21-3.73.98 1-3.63-.24-.37a9.85 9.85 0 01-1.51-5.3c0-5.44 4.43-9.87 9.88-9.87 2.64 0 5.12 1.03 6.98 2.9a9.81 9.81 0 012.89 6.98c-.01 5.44-4.43 9.89-9.86 9.89zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.04-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.09 3.19 5.06 4.47.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.19-.57-.33z" />
+    </svg>
+  </a>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#sobre" onclick="closeMenu()">Sobre nós</a>
+    <a href="#servicos" onclick="closeMenu()">Serviços</a>
+    <a href="#depoimentos" onclick="closeMenu()">Depoimentos</a>
+    <a href="#contato" class="mob-cta" onclick="closeMenu()">Agendar Consulta</a>
+  </div>
+
+  <nav id="navbar">
+    <a href="#hero" class="logo-img"><img src="images/logo.png" alt="Shallon" /></a>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre nós</a></li>
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#depoimentos">Depoimentos</a></li>
+      <li><a href="#contato" class="nav-cta">Agendar</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-grid-lines"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Clínica Odontológica Shallon</div>
+      <h1 class="hero-title">
+        O sorriso que<br>você <em>merece</em>
+      </h1>
+      <p class="hero-sub">
+        Cuidado odontológico de excelência, tecnologia de ponta e um atendimento que transforma sua experiência na cadeira do dentista.
+      </p>
+      <div class="hero-actions">
+        <a href="#contato" class="btn-primary">Agendar Consulta</a>
+        <a href="#sobre" class="btn-outline">
+          <span class="play-icon">
+            <svg viewBox="0 0 10 12">
+              <polygon points="0,0 10,6 0,12" />
+            </svg>
+          </span>
+          Conheça a Clínica
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-stat">
+        <div class="num">12<span style="color:var(--gold)">+</span></div>
+        <div class="label">Anos de<br>Experiência</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">4<span style="color:var(--gold)">k</span></div>
+        <div class="label">Pacientes<br>Atendidos</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">98<span style="color:var(--gold)">%</span></div>
+        <div class="label">Satisfação<br>Garantida</div>
+      </div>
+    </div>
+
+    <div class="scroll-down">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12l7 7 7-7" />
+      </svg>
+      Scroll
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="sobre-grid">
+      <div class="sobre-img reveal">
+        <div class="sobre-img-main">
+          <img src="images/clinica-foto.jpg" alt="Clínica Shallon" style="width:100%;height:100%;object-fit:cover;border-radius:24px;" />
+        </div>
+        <div class="sobre-img-badge">
+          <div class="badge-num">12<span>+</span></div>
+          <div class="badge-label">Anos de<br>Excelência</div>
+        </div>
+      </div>
+
+      <div class="sobre-content reveal" style="transition-delay:0.15s">
+        <div class="section-label">Sobre Nós</div>
+        <h2 class="section-title">Cuidado que vai<br><em>além do sorriso</em></h2>
+        <p class="sobre-text">
+          A Shallon nasceu da crença de que a odontologia deve ser vivida sem medo. Nossa equipe une formação de ponta com a sensibilidade de quem entende que cada paciente é único.
+        </p>
+        <div class="sobre-features">
+          <div class="feature-row">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+            </div>
+            <div class="feature-info">
+              <h4>Tecnologia de última geração</h4>
+              <p>Equipamentos modernos para diagnóstico preciso e tratamentos menos invasivos.</p>
+            </div>
+          </div>
+          <div class="feature-row">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg>
+            </div>
+            <div class="feature-info">
+              <h4>Atendimento humanizado</h4>
+              <p>Cada consulta começa com escuta ativa. Você nunca será apenas um número aqui.</p>
+            </div>
+          </div>
+          <div class="feature-row">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <div class="feature-info">
+              <h4>Horários flexíveis</h4>
+              <p>Funcionamos em horários adaptados à rotina de quem tem muito a fazer.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos">
+    <div class="servicos-header reveal">
+      <div class="section-label">Nossos Serviços</div>
+      <h2 class="section-title">Tratamentos que<br><em>transformam vidas</em></h2>
+    </div>
+    <div class="servicos-grid">
+      <div class="servico-card reveal" style="background-image: url('images/estetica.jpg');">
+        <div class="servico-num">01</div>
+        <div class="servico-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+            <line x1="9" y1="9" x2="9.01" y2="9" />
+            <line x1="15" y1="9" x2="15.01" y2="9" />
+          </svg>
+        </div>
+        <h3 class="servico-title">Odontologia Estética</h3>
+        <p class="servico-desc">Clareamento, facetas e lentes de contato dental para um sorriso que impressiona em qualquer situação.</p>
+      </div>
+      <div class="servico-card reveal" style="background-image: url('images/implantes.jpg');">
+        <div class="servico-num">02</div>
+        <div class="servico-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+          </svg>
+        </div>
+        <h3 class="servico-title">Implantes Dentários</h3>
+        <p class="servico-desc">Reabilitação oral completa com implantes de titânio para devolver função e estética com naturalidade.</p>
+      </div>
+      <div class="servico-card reveal" style="background-image: url('images/ortodontia.jpg');">
+        <div class="servico-num">03</div>
+        <div class="servico-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
+          </svg>
+        </div>
+        <h3 class="servico-title">Ortodontia</h3>
+        <p class="servico-desc">Aparelhos convencionais e alinhadores invisíveis para corrigir seu sorriso com conforto e discrição.</p>
+      </div>
+      <div class="servico-card reveal" style="background-image: url('images/clinica.jpg');">
+        <div class="servico-num">04</div>
+        <div class="servico-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 14 19.79 19.79 0 0 1 1.61 5.42C1.6 4.32 2.42 3.4 3.52 3H6.5a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.7a16 16 0 0 0 6 6l1.06-1.06a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+        </div>
+        <h3 class="servico-title">Clínica Geral</h3>
+        <p class="servico-desc">Prevenção, limpeza, restaurações e toda a rotina odontológica com excelência e cuidado.</p>
+      </div>
+      <div class="servico-card reveal" style="background-image: url('images/periodontia.jpg');">
+        <div class="servico-num">05</div>
+        <div class="servico-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M4.5 12.5l5 5L20 7" />
+          </svg>
+        </div>
+        <h3 class="servico-title">Periodontia</h3>
+        <p class="servico-desc">Tratamento das gengivas com técnicas avançadas para garantir uma base saudável ao seu sorriso.</p>
+      </div>
+      <div class="servico-card reveal" style="background-image: url('images/pediatrica.jpg');">
+        <div class="servico-num">06</div>
+        <div class="servico-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10zm0-18c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8z" />
+            <path d="M12 6v6l4 2" />
+          </svg>
+        </div>
+        <h3 class="servico-title">Odonto Pediátrica</h3>
+        <p class="servico-desc">Atendimento especializado para crianças, criando uma relação positiva com o dentista desde cedo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section id="depoimentos">
+    <div class="dep-bg"></div>
+    <div class="reveal">
+      <div class="section-label">Depoimentos</div>
+      <h2 class="section-title">O que nossos<br><em>pacientes dizem</em></h2>
+    </div>
+    <div class="dep-slider-wrap reveal" style="transition-delay:0.2s">
+      <div class="dep-track" id="depTrack">
+        <div class="dep-card">
+          <div class="dep-stars">★★★★★</div>
+          <p class="dep-text">"Sempre tive medo de dentista. Na Shallon, isso mudou completamente. Fui acolhida desde o primeiro minuto e saí sorrindo — literalmente."</p>
+          <div class="dep-author">
+            <div class="dep-avatar">A</div>
+            <div>
+              <div class="dep-name">Ana Clara Mendes</div>
+              <div class="dep-role">Paciente há 3 anos</div>
+            </div>
+          </div>
+        </div>
+        <div class="dep-card">
+          <div class="dep-stars">★★★★★</div>
+          <p class="dep-text">"Fiz meu implante na Shallon e o resultado superou minhas expectativas. Profissionalismo impecável do início ao fim do tratamento."</p>
+          <div class="dep-author">
+            <div class="dep-avatar">R</div>
+            <div>
+              <div class="dep-name">Roberto Figueiredo</div>
+              <div class="dep-role">Implante Dentário</div>
+            </div>
+          </div>
+        </div>
+        <div class="dep-card">
+          <div class="dep-stars">★★★★★</div>
+          <p class="dep-text">"O clareamento transformou meu sorriso. Agora tenho muito mais confiança. A equipe é atenciosa e explica cada etapa do procedimento."</p>
+          <div class="dep-author">
+            <div class="dep-avatar">J</div>
+            <div>
+              <div class="dep-name">Juliana Santana</div>
+              <div class="dep-role">Clareamento Dental</div>
+            </div>
+          </div>
+        </div>
+        <div class="dep-card">
+          <div class="dep-stars">★★★★★</div>
+          <p class="dep-text">"Levei minha filha para o tratamento pediátrico e ela adorou. Saiu querendo voltar! Ótima estrutura e atendimento cuidadoso com as crianças."</p>
+          <div class="dep-author">
+            <div class="dep-avatar">M</div>
+            <div>
+              <div class="dep-name">Mariana Costa</div>
+              <div class="dep-role">Odonto Pediátrica</div>
+            </div>
+          </div>
+        </div>
+        <div class="dep-card">
+          <div class="dep-stars">★★★★★</div>
+          <p class="dep-text">"Aparelho invisível foi a melhor decisão que tomei. Ninguém percebia que estava usando e o resultado foi fantástico. Equipe sempre disponível."</p>
+          <div class="dep-author">
+            <div class="dep-avatar">T</div>
+            <div>
+              <div class="dep-name">Thiago Alves</div>
+              <div class="dep-role">Ortodontia Invisível</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dep-controls" id="depControls"></div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="contato-grid">
+      <div class="contato-info reveal">
+        <div class="section-label">Contato</div>
+        <h2 class="section-title">Agende sua<br><em>consulta hoje</em></h2>
+        <p>Entre em contato e dê o primeiro passo para o sorriso que você sempre quis.</p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <div class="contact-item-info">
+              <strong>Localização</strong>
+              <span>Rua Victor Ferreira Manahiba, 695 - Agenor de Carvalho</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 14 19.79 19.79 0 0 1 1.61 5.42C1.6 4.32 2.42 3.4 3.52 3H6.5a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.7a16 16 0 0 0 6 6l1.06-1.06a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+            </div>
+            <div class="contact-item-info">
+              <strong>Telefone / WhatsApp</strong>
+              <span>(69) 9 9231-4977</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <div class="contact-item-info">
+              <strong>Horário de Funcionamento</strong>
+              <span>Seg–Sex 8h–19h · Sáb 8h–13h</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contato-form reveal" style="transition-delay:0.2s" id="contactForm">
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" placeholder="Seu nome" id="f-nome" />
+        </div>
+        <div class="form-group">
+          <label>Telefone</label>
+          <input type="tel" placeholder="(00) 00000-0000" id="f-tel" />
+        </div>
+
+        <div class="form-group">
+          <label>Serviço de Interesse</label>
+          <select id="f-servico">
+            <option value="">Selecione...</option>
+            <option>Odontologia Estética</option>
+            <option>Implantes Dentários</option>
+            <option>Ortodontia</option>
+            <option>Clínica Geral</option>
+            <option>Periodontia</option>
+            <option>Odonto Pediátrica</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mensagem</label>
+          <textarea placeholder="Como podemos ajudar?" id="f-msg"></textarea>
+        </div>
+        <button class="form-submit" onclick="submitForm()">Enviar Mensagem</button>
+        <p class="form-note">Você será redirecionado ao WhatsApp para enviar a mensagem.</p>
+        <div class="form-success" id="formSuccess">
+          ✓ WhatsApp aberto! Envie a mensagem e entraremos em contato em breve.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="Shallon" class="footer-logo-img" />
+        <p>Odontologia de excelência para um sorriso que transforma sua vida.</p>
+      </div>
+      <div class="footer-links">
+        <h5>Navegação</h5>
+        <ul>
+          <li><a href="#sobre">Sobre Nós</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#depoimentos">Depoimentos</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Serviços</h5>
+        <ul>
+          <li><a href="#">Odontologia Estética</a></li>
+          <li><a href="#">Implantes</a></li>
+          <li><a href="#">Ortodontia</a></li>
+          <li><a href="#">Clínica Geral</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Contato</h5>
+        <ul>
+          <li><a href="#">(69) 9 9999-0000</a></li>
+          <li><a href="#">contato@shallon.com.br</a></li>
+          <li><a href="#">Rua das Flores, 482</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Shallon Clínica Odontológica. Todos os direitos reservados.</p>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/shallonodontologiaeprotese/" class="social-btn" aria-label="Instagram">
+          <svg viewBox="0 0 24 24">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+          </svg>
+        </a>
+        <a href="https://www.facebook.com/shallonodontologiaeprotese" class="social-btn" aria-label="Facebook">
+          <svg viewBox="0 0 24 24">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+          </svg>
+        </a>
+        <a href="#" class="social-btn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+            <rect x="2" y="9" width="4" height="12" />
+            <circle cx="4" cy="4" r="2" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ─── HAMBURGER MENU ──────────────────────────────
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const btn = document.getElementById('hamburger');
+      const open = menu.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // ─── NAVBAR SCROLL ───────────────────────────────
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ─── REVEAL ON SCROLL ────────────────────────────
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => observer.observe(r));
+
+    // ─── DEPOIMENTOS SLIDER ──────────────────────────
+    const track = document.getElementById('depTrack');
+    const controls = document.getElementById('depControls');
+    let currentDep = 0;
+    const cards = track.querySelectorAll('.dep-card');
+
+    function getPerView() {
+      return window.innerWidth <= 768 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
+    }
+
+    function buildDots() {
+      controls.innerHTML = '';
+      const total = Math.ceil(cards.length / getPerView());
+      for (let i = 0; i < total; i++) {
+        const d = document.createElement('div');
+        d.className = 'dep-dot' + (i === 0 ? ' active' : '');
+        d.addEventListener('click', () => goTo(i));
+        controls.appendChild(d);
+      }
+    }
+
+    function goTo(idx) {
+      const pv = getPerView();
+      const total = Math.ceil(cards.length / pv);
+      currentDep = Math.min(idx, total - 1);
+      const cardW = cards[0].offsetWidth + 28;
+      track.style.transform = `translateX(-${currentDep * cardW}px)`;
+      document.querySelectorAll('.dep-dot').forEach((d, i) => d.classList.toggle('active', i === currentDep));
+    }
+
+    buildDots();
+    setInterval(() => {
+      const total = Math.ceil(cards.length / getPerView());
+      goTo((currentDep + 1) % total);
+    }, 5000);
+
+    window.addEventListener('resize', () => {
+      currentDep = 0;
+      buildDots();
+      goTo(0);
+    });
+
+    // ─── COUNTER ANIMATION ───────────────────────────
+    function animateCounter(el, target, suffix, color) {
+      let start = 0; const dur = 1800;
+      const step = timestamp => {
+        if (!start) start = timestamp;
+        const p = Math.min((timestamp - start) / dur, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        el.innerHTML = Math.floor(ease * target) + `<span style="color:${color}">${suffix}</span>`;
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+
+    const statsObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const nums = document.querySelectorAll('.hero-stat .num');
+          if (nums[0]) animateCounter(nums[0], 12, '+', 'var(--gold)');
+          if (nums[1]) animateCounter(nums[1], 4, 'k', 'var(--gold)');
+          if (nums[2]) animateCounter(nums[2], 98, '%', 'var(--gold)');
+          statsObs.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    const heroCard = document.querySelector('.hero-card');
+    if (heroCard) statsObs.observe(heroCard);
+
+    // ─── FORM SUBMIT ─────────────────────────────────
+    function submitForm() {
+      const nome = document.getElementById('f-nome').value.trim();
+      const tel = document.getElementById('f-tel').value.trim();
+      const servico = document.getElementById('f-servico').value;
+      const msg = document.getElementById('f-msg').value.trim();
+
+      if (!nome || !tel) {
+        alert('Por favor, preencha pelo menos nome e telefone.');
+        return;
+      }
+
+      // ── Número da clínica — altere aqui ──────────────────────────
+      const NUMERO_CLINICA = '5569999310000'; // formato: 55 + DDD + número
+      // ─────────────────────────────────────────────────────────────
+
+      const texto =
+        `*Nova mensagem do site Shallon*%0A%0A` +
+        `*Nome:* ${encodeURIComponent(nome)}%0A` +
+        `*Telefone:* ${encodeURIComponent(tel)}%0A` +
+        `*Serviço:* ${encodeURIComponent(servico || 'Não selecionado')}%0A` +
+        `*Mensagem:* ${encodeURIComponent(msg || 'Sem mensagem adicional')}`;
+
+      const btn = document.querySelector('.form-submit');
+      btn.textContent = 'Abrindo WhatsApp...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        window.open(`https://wa.me/${NUMERO_CLINICA}?text=${texto}`, '_blank');
+        btn.style.display = 'none';
+        document.querySelector('.form-note').style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+        // Reset form after 4s
+        setTimeout(() => {
+          document.getElementById('f-nome').value = '';
+          document.getElementById('f-tel').value = '';
+          document.getElementById('f-email').value = '';
+          document.getElementById('f-servico').value = '';
+          document.getElementById('f-msg').value = '';
+          btn.textContent = 'Enviar Mensagem';
+          btn.disabled = false;
+          btn.style.display = 'block';
+          document.querySelector('.form-note').style.display = 'block';
+          document.getElementById('formSuccess').style.display = 'none';
+        }, 4000);
+      }, 600);
+    }
+
+    // ─── SMOOTH PARALLAX HERO ────────────────────────
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      const heroContent = document.querySelector('.hero-content');
+      if (heroContent && y < window.innerHeight) {
+        heroContent.style.transform = `translateY(${y * 0.22}px)`;
+        heroContent.style.opacity = 1 - y / (window.innerHeight * 0.7);
+      }
+    });
+  </script>
+</body>
+
+</html>
