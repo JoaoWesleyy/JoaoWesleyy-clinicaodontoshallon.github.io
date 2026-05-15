@@ -452,7 +452,7 @@
 
     /* ─── SECTION SHARED ──────────────────────────── */
     section {
-      padding: 50px 60px;
+      padding: 80px 60px;
     }
 
     .section-label {
@@ -664,17 +664,19 @@
     .servico-card {
       border: none;
       border-radius: 20px;
-      padding: 40px 32px;
+      padding: 24px;
       position: relative;
       overflow: hidden;
       cursor: pointer;
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
       transition: transform 0.4s var(--ease-spring), box-shadow 0.4s;
-      min-height: 150px;
+      height: 220px;
+      max-width: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: center;
     }
 
     /* dark overlay always visible */
@@ -739,10 +741,10 @@
 
     .servico-title {
       font-family: var(--font-display);
-      font-size: 2.1rem;
-      font-weight: 600;
+      font-size: 1.8rem;
+      font-weight: 700;
       color: #ffffff;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       line-height: 1.2;
       transition: color 0.4s;
       position: relative;
@@ -750,8 +752,8 @@
     }
 
     .servico-desc {
-      font-size: 1.08rem;
-      line-height: 1.9;
+      font-size: 0.82rem;
+      line-height: 1.6;
       color: rgba(255, 255, 255, 0.85);
       transition: color 0.4s;
       position: relative;
@@ -1625,14 +1627,12 @@
 
 <body>
 
-  <!-- WhatsApp float -->
-  <a class="whatsapp-float" href="https://wa.me/5500000000000" target="_blank" aria-label="WhatsApp">
+  <a class="whatsapp-float" href="https://wa.me/5569992314977" target="_blank" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path d="M20.52 3.48A11.89 11.89 0 0012.05.01C5.46.01.14 5.33.14 11.93c0 2.1.55 4.15 1.59 5.96L.1 24l6.28-1.65a11.9 11.9 0 005.67 1.44h.01c6.58 0 11.9-5.33 11.9-11.93 0-3.18-1.24-6.17-3.49-8.43zm-8.47 18.34h-.01a9.88 9.88 0 01-5.04-1.37l-.36-.21-3.73.98 1-3.63-.24-.37a9.85 9.85 0 01-1.51-5.3c0-5.44 4.43-9.87 9.88-9.87 2.64 0 5.12 1.03 6.98 2.9a9.81 9.81 0 012.89 6.98c-.01 5.44-4.43 9.89-9.86 9.89zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.04-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.09 3.19 5.06 4.47.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.19-.57-.33z" />
     </svg>
   </a>
 
-  <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="#sobre" onclick="closeMenu()">Sobre nós</a>
     <a href="#servicos" onclick="closeMenu()">Serviços</a>
@@ -1769,67 +1769,26 @@
     </div>
     <div class="servicos-grid">
       <div class="servico-card reveal" style="background-image: url('images/estetica.jpg');">
-        <div class="servico-num">01</div>
-        <div class="servico-icon">
-          <svg viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M8 14s1.5 2 4 2 4-2 4-2" />
-            <line x1="9" y1="9" x2="9.01" y2="9" />
-            <line x1="15" y1="9" x2="15.01" y2="9" />
-          </svg>
-        </div>
         <h3 class="servico-title">Odontologia Estética</h3>
         <p class="servico-desc">Clareamento, facetas e lentes de contato dental para um sorriso que impressiona em qualquer situação.</p>
       </div>
       <div class="servico-card reveal" style="background-image: url('images/implantes.jpg');">
-        <div class="servico-num">02</div>
-        <div class="servico-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-          </svg>
-        </div>
         <h3 class="servico-title">Implantes Dentários</h3>
         <p class="servico-desc">Reabilitação oral completa com implantes de titânio para devolver função e estética com naturalidade.</p>
       </div>
       <div class="servico-card reveal" style="background-image: url('images/ortodontia.jpg');">
-        <div class="servico-num">03</div>
-        <div class="servico-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-            <polyline points="9 22 9 12 15 12 15 22" />
-          </svg>
-        </div>
         <h3 class="servico-title">Ortodontia</h3>
         <p class="servico-desc">Aparelhos convencionais e alinhadores invisíveis para corrigir seu sorriso com conforto e discrição.</p>
       </div>
       <div class="servico-card reveal" style="background-image: url('images/clinica.jpg');">
-        <div class="servico-num">04</div>
-        <div class="servico-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 14 19.79 19.79 0 0 1 1.61 5.42C1.6 4.32 2.42 3.4 3.52 3H6.5a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.7a16 16 0 0 0 6 6l1.06-1.06a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-          </svg>
-        </div>
         <h3 class="servico-title">Clínica Geral</h3>
         <p class="servico-desc">Prevenção, limpeza, restaurações e toda a rotina odontológica com excelência e cuidado.</p>
       </div>
       <div class="servico-card reveal" style="background-image: url('images/periodontia.jpg');">
-        <div class="servico-num">05</div>
-        <div class="servico-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M4.5 12.5l5 5L20 7" />
-          </svg>
-        </div>
         <h3 class="servico-title">Periodontia</h3>
         <p class="servico-desc">Tratamento das gengivas com técnicas avançadas para garantir uma base saudável ao seu sorriso.</p>
       </div>
       <div class="servico-card reveal" style="background-image: url('images/pediatrica.jpg');">
-        <div class="servico-num">06</div>
-        <div class="servico-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10zm0-18c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8z" />
-            <path d="M12 6v6l4 2" />
-          </svg>
-        </div>
         <h3 class="servico-title">Odonto Pediátrica</h3>
         <p class="servico-desc">Atendimento especializado para crianças, criando uma relação positiva com o dentista desde cedo.</p>
       </div>
@@ -1956,11 +1915,6 @@
           <input type="text" placeholder="Seu nome" id="f-nome" />
         </div>
         <div class="form-group">
-          <label>Telefone</label>
-          <input type="tel" placeholder="(00) 00000-0000" id="f-tel" />
-        </div>
-
-        <div class="form-group">
           <label>Serviço de Interesse</label>
           <select id="f-servico">
             <option value="">Selecione...</option>
@@ -2013,9 +1967,8 @@
       <div class="footer-links">
         <h5>Contato</h5>
         <ul>
-          <li><a href="#">(69) 9 9999-0000</a></li>
-          <li><a href="#">contato@shallon.com.br</a></li>
-          <li><a href="#">Rua das Flores, 482</a></li>
+          <li><a href="#">(69) 9 9231-4977</a></li>
+          <li><a href="#">Rua Victor Ferreira Manahiba, 695 - Agenor de Carvalho</a></li>
         </ul>
       </div>
     </div>
@@ -2142,7 +2095,6 @@
     const heroCard = document.querySelector('.hero-card');
     if (heroCard) statsObs.observe(heroCard);
 
-    // ─── FORM SUBMIT ─────────────────────────────────
     function submitForm() {
       const nome = document.getElementById('f-nome').value.trim();
       const tel = document.getElementById('f-tel').value.trim();
@@ -2154,14 +2106,11 @@
         return;
       }
 
-      // ── Número da clínica — altere aqui ──────────────────────────
-      const NUMERO_CLINICA = '5569999310000'; // formato: 55 + DDD + número
-      // ─────────────────────────────────────────────────────────────
+      const NUMERO_CLINICA = '5569992314977';
 
       const texto =
-        `*Nova mensagem do site Shallon*%0A%0A` +
+        `*Seja muito bem-vindo a clínica Shallon. Em breve um atendente entrará em contato.*%0A%0A` +
         `*Nome:* ${encodeURIComponent(nome)}%0A` +
-        `*Telefone:* ${encodeURIComponent(tel)}%0A` +
         `*Serviço:* ${encodeURIComponent(servico || 'Não selecionado')}%0A` +
         `*Mensagem:* ${encodeURIComponent(msg || 'Sem mensagem adicional')}`;
 
@@ -2177,8 +2126,6 @@
         // Reset form after 4s
         setTimeout(() => {
           document.getElementById('f-nome').value = '';
-          document.getElementById('f-tel').value = '';
-          document.getElementById('f-email').value = '';
           document.getElementById('f-servico').value = '';
           document.getElementById('f-msg').value = '';
           btn.textContent = 'Enviar Mensagem';
@@ -2190,7 +2137,6 @@
       }, 600);
     }
 
-    // ─── SMOOTH PARALLAX HERO ────────────────────────
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
       const heroContent = document.querySelector('.hero-content');
