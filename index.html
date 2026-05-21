@@ -48,24 +48,24 @@
 
 
 
-    /* ─── NAV ─────────────────────────────────────── */
     nav {
       position: fixed;
       top: 0;
       width: 100%;
       z-index: 100;
-      padding: 22px 60px;
+      padding: 5px 60px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: background 0.4s, padding 0.4s, box-shadow 0.4s;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 2px 30px rgba(10, 31, 60, 0.08);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
     }
 
     nav.scrolled {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(16px);
-      padding: 0px 60px;
-      box-shadow: 0 2px 30px rgba(10, 31, 60, 0.08);
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 2px 24px rgba(10, 31, 60, 0.06);
     }
 
     .logo {
@@ -76,10 +76,6 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       transition: color 0.4s;
-    }
-
-    nav.scrolled .logo {
-      color: var(--blue-deep);
     }
 
     .logo span {
@@ -98,11 +94,6 @@
       width: auto;
       max-width: 200px;
       object-fit: contain;
-      filter: brightness(0) invert(1);
-      transition: filter 0.4s, opacity 0.3s;
-    }
-
-    nav.scrolled .logo-img img {
       filter: none;
     }
 
@@ -128,14 +119,10 @@
       font-weight: 600;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.88);
+      color: var(--text-muted);
       text-decoration: none;
       position: relative;
       transition: color 0.3s;
-    }
-
-    nav.scrolled .nav-links a {
-      color: var(--text-muted);
     }
 
     .nav-links a::after {
@@ -162,17 +149,12 @@
       font-weight: 500;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--white) !important;
-      border: 1px solid rgba(255, 255, 255, 0.5);
+      color: var(--blue-soft) !important;
+      border: 1px solid var(--blue-soft);
       padding: 10px 22px;
       border-radius: 40px;
       text-decoration: none;
       transition: background 0.3s, border-color 0.3s, color 0.3s !important;
-    }
-
-    nav.scrolled .nav-cta {
-      color: var(--blue-soft) !important;
-      border-color: var(--blue-soft);
     }
 
     .nav-cta:hover {
@@ -181,10 +163,9 @@
       color: var(--white) !important;
     }
 
-    /* ─── HERO ────────────────────────────────────── */
     #hero {
       min-height: 100vh;
-      background: linear-gradient(140deg, rgba(10, 31, 60, 0.82) 0%, rgba(14, 58, 110, 0.75) 55%, rgba(26, 94, 168, 0.65) 100%), url('images/hero-bg.jpg') center/cover no-repeat;
+      background: linear-gradient(140deg, rgba(10, 31, 60, 0.82) 0%, rgba(14, 58, 110, 0.75) 55%, rgba(26, 94, 168, 0.65) 100%), url('images/hero-bg.png') center/cover no-repeat;
       display: flex;
       align-items: center;
       position: relative;
@@ -230,11 +211,24 @@
       animation: fadeUp 0.8s var(--ease-smooth) 0.3s forwards;
     }
 
-    .hero-eyebrow::before {
-      content: '';
-      width: 40px;
-      height: 1px;
-      background: var(--gold);
+    .hero-logo-crop {
+      position: relative;
+      display: block;
+      width: 168px;
+      height: 68px;
+      overflow: hidden;
+      flex: 0 0 auto;
+    }
+
+    .hero-logo-crop img {
+      position: absolute;
+      left: 50%;
+      top: 54%;
+      width: 210px;
+      max-width: none;
+      height: auto;
+      transform: translate(-50%, -50%);
+      display: block;
     }
 
     .hero-title {
@@ -338,7 +332,6 @@
       width: 12px;
     }
 
-    /* floating card */
     .hero-card {
       position: absolute;
       right: 8%;
@@ -379,7 +372,6 @@
       color: var(--gold);
     }
 
-    /* scroll indicator */
     .scroll-down {
       position: absolute;
       bottom: 40px;
@@ -401,7 +393,6 @@
       opacity: 0.5;
     }
 
-    /* ─── ANIMATIONS ──────────────────────────────── */
     @keyframes fadeUp {
       to {
         opacity: 1;
@@ -450,7 +441,16 @@
       }
     }
 
-    /* ─── SECTION SHARED ──────────────────────────── */
+    @keyframes shallonWatermark {
+      from {
+        left: -45vw;
+      }
+
+      to {
+        left: 100vw;
+      }
+    }
+
     section {
       padding: 80px 60px;
     }
@@ -465,6 +465,7 @@
       align-items: center;
       gap: 14px;
       margin-bottom: 20px;
+      margin-top: 10px;
     }
 
     .section-label::before {
@@ -498,7 +499,6 @@
       transform: translateY(0);
     }
 
-    /* ─── SOBRE ───────────────────────────────────── */
     #sobre {
       background: var(--white-warm);
       position: relative;
@@ -508,17 +508,18 @@
     #sobre::before {
       content: 'SHALLON';
       position: absolute;
-      right: -40px;
+      left: -45vw;
       top: 50%;
       transform: translateY(-50%);
       font-family: var(--font-display);
-      font-size: 18vw;
+      font-size: 22vw;
       font-weight: 700;
-      color: rgba(14, 58, 110, 0.04);
+      color: rgba(14, 58, 110, 0.075);
       line-height: 1;
       letter-spacing: -0.04em;
       pointer-events: none;
       user-select: none;
+      animation: shallonWatermark 18s linear infinite;
     }
 
     .sobre-grid {
@@ -598,7 +599,7 @@
       font-size: 1.2rem;
       line-height: 2;
       color: var(--text-muted);
-      margin-bottom: 40px;
+      margin-bottom: 25px;
     }
 
     .sobre-features {
@@ -644,21 +645,42 @@
       line-height: 1.7;
     }
 
-    /* ─── SERVIÇOS ────────────────────────────────── */
     #servicos {
       background: var(--white-warm);
+      position: relative;
+      overflow: hidden;
+    }
 
+    #servicos::before {
+      content: 'SHALLON';
+      position: absolute;
+      left: -45vw;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-display);
+      font-size: 22vw;
+      font-weight: 700;
+      color: rgba(14, 58, 110, 0.075);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      pointer-events: none;
+      user-select: none;
+      animation: shallonWatermark 18s linear infinite;
     }
 
     .servicos-header {
       max-width: 600px;
       margin-bottom: 64px;
+      position: relative;
+      z-index: 1;
     }
 
     .servicos-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 28px;
+      position: relative;
+      z-index: 1;
     }
 
     .servico-card {
@@ -676,26 +698,25 @@
       max-width: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-end;
     }
 
-    /* dark overlay always visible */
     .servico-card::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(10, 31, 60, 0.88) 0%, rgba(10, 31, 60, 0.45) 55%, rgba(10, 31, 60, 0.2) 100%);
+      background: linear-gradient(to top, rgba(10, 31, 60, 0.72) 0%, rgba(10, 31, 60, 0.3) 48%, rgba(10, 31, 60, 0.06) 100%);
       transition: background 0.4s;
       z-index: 0;
     }
 
     .servico-card:hover::before {
-      background: linear-gradient(to top, rgba(14, 58, 110, 0.95) 0%, rgba(14, 58, 110, 0.7) 55%, rgba(26, 94, 168, 0.4) 100%);
+      background: linear-gradient(to top, rgba(14, 58, 110, 0.78) 0%, rgba(14, 58, 110, 0.38) 48%, rgba(26, 94, 168, 0.12) 100%);
     }
 
     .servico-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 28px 60px rgba(10, 31, 60, 0.28);
+      box-shadow: 0 22px 44px rgba(10, 31, 60, 0.18);
     }
 
     .servico-card:hover .servico-title,
@@ -760,7 +781,6 @@
       z-index: 1;
     }
 
-    /* ─── DEPOIMENTOS ─────────────────────────────── */
     #depoimentos {
       background: linear-gradient(160deg, var(--blue-deep) 0%, var(--blue-mid) 100%);
       position: relative;
@@ -813,9 +833,9 @@
       min-width: calc((100% - 56px) / 3);
       max-width: calc((100% - 56px) / 3);
       box-sizing: border-box;
-      background: rgba(255, 255, 255, 0.06);
+      background: linear-gradient(145deg, rgba(244, 248, 253, 0.18), rgba(208, 230, 249, 0.1));
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(208, 230, 249, 0.22);
       border-radius: 20px;
       padding: 36px;
       flex-shrink: 0;
@@ -968,6 +988,7 @@
       font-size: 1.1rem;
       color: var(--blue-deep);
       font-weight: 400;
+      line-height: 1.5;
     }
 
     .contato-form {
@@ -978,6 +999,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-top: 15px;
     }
 
     .contato-form .form-group,
@@ -1071,7 +1093,6 @@
       font-style: italic;
     }
 
-    /* ─── FOOTER ──────────────────────────────────── */
     footer {
       background: var(--blue-deep);
       padding: 60px 60px 36px;
@@ -1144,11 +1165,12 @@
     .footer-socials {
       display: flex;
       gap: 14px;
+      margin-right: 86px;
     }
 
     .social-btn {
-      width: 36px;
-      height: 36px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
       border: 1px solid rgba(255, 255, 255, 0.12);
       display: flex;
@@ -1165,7 +1187,7 @@
     }
 
     .social-btn svg {
-      width: 14px;
+      width: 19px;
       stroke: rgba(255, 255, 255, 0.6);
       fill: none;
       stroke-width: 2;
@@ -1175,7 +1197,6 @@
       stroke: white;
     }
 
-    /* ─── WHATSAPP FLOAT ──────────────────────────── */
     .whatsapp-float {
       position: fixed;
       bottom: 36px;
@@ -1204,8 +1225,6 @@
       fill: white;
     }
 
-    /* ─── RESPONSIVE ──────────────────────────────── */
-    /* ─── HAMBURGER ───────────────────────────────── */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -1219,13 +1238,9 @@
       display: block;
       width: 26px;
       height: 2px;
-      background: var(--white);
-      border-radius: 2px;
-      transition: transform 0.35s, opacity 0.3s, background 0.4s;
-    }
-
-    nav.scrolled .hamburger span {
       background: var(--blue-deep);
+      border-radius: 2px;
+      transition: transform 0.35s, opacity 0.3s;
     }
 
     .hamburger.open span:nth-child(1) {
@@ -1240,9 +1255,8 @@
       transform: translateY(-7px) rotate(-45deg);
     }
 
-    /* mobile nav drawer */
     .mobile-menu {
-      display: none;
+      display: flex;
       position: fixed;
       top: 0;
       left: 0;
@@ -1256,12 +1270,16 @@
       gap: 36px;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.35s var(--ease-smooth);
+      visibility: hidden;
+      transform: translateY(-100%);
+      transition: opacity 0.35s var(--ease-smooth), visibility 0.35s var(--ease-smooth), transform 0.35s var(--ease-smooth);
     }
 
     .mobile-menu.open {
       opacity: 1;
       pointer-events: all;
+      visibility: visible;
+      transform: translateY(0);
     }
 
     .mobile-menu a {
@@ -1296,14 +1314,9 @@
       border-color: var(--gold);
     }
 
-    /* ─── TABLET (≤1024px) ────────────────────────── */
     @media (max-width: 1024px) {
       nav {
-        padding: 20px 32px;
-      }
-
-      nav.scrolled {
-        padding: 10px 28px;
+        padding: 10px 32px;
       }
 
       section {
@@ -1359,14 +1372,9 @@
       }
     }
 
-    /* ─── MOBILE (≤768px) ─────────────────────────── */
     @media (max-width: 768px) {
       nav {
-        padding: 18px 20px;
-      }
-
-      nav.scrolled {
-        padding: 5px 15px;
+        padding: 8px 20px;
       }
 
       .nav-links {
@@ -1394,6 +1402,15 @@
       .hero-eyebrow {
         font-size: 0.72rem;
         letter-spacing: 0.1em;
+      }
+
+      .hero-logo-crop {
+        width: 124px;
+        height: 50px;
+      }
+
+      .hero-logo-crop img {
+        width: 154px;
       }
 
       .hero-title {
@@ -1576,6 +1593,11 @@
         text-align: center;
       }
 
+      .footer-socials {
+        margin-right: 0;
+        transform: translateX(-22px);
+      }
+
       footer {
         padding: 36px 18px 20px;
       }
@@ -1592,11 +1614,14 @@
       }
 
       #sobre::before {
-        font-size: 28vw;
+        font-size: 34vw;
+      }
+
+      #servicos::before {
+        font-size: 34vw;
       }
     }
 
-    /* ─── SMALL MOBILE (≤400px) ───────────────────── */
     @media (max-width: 400px) {
       .hero-title {
         font-size: 2.2rem;
@@ -1604,6 +1629,15 @@
 
       .hero-eyebrow {
         font-size: 0.82rem;
+      }
+
+      .hero-logo-crop {
+        width: 130px;
+        height: 52px;
+      }
+
+      .hero-logo-crop img {
+        width: 162px;
       }
 
       .logo {
@@ -1653,14 +1687,17 @@
     </div>
   </nav>
 
-  <!-- HERO -->
   <section id="hero">
     <div class="hero-bg-pattern"></div>
     <div class="hero-grid-lines"></div>
     <div class="hero-content">
-      <div class="hero-eyebrow">Clínica Odontológica Shallon</div>
+      <div class="hero-eyebrow">
+        <span class="hero-logo-crop">
+          <img src="images/font-logo.png" alt="Shallon" />
+        </span>
+      </div>
       <h1 class="hero-title">
-        O sorriso que<br>você <em>merece</em>
+        Prótese &<br><em>Odontolgia</em>
       </h1>
       <p class="hero-sub">
         Cuidado odontológico de excelência, tecnologia de ponta e um atendimento que transforma sua experiência na cadeira do dentista.
@@ -1701,7 +1738,6 @@
     </div>
   </section>
 
-  <!-- SOBRE -->
   <section id="sobre">
     <div class="sobre-grid">
       <div class="sobre-img reveal">
@@ -1761,7 +1797,6 @@
     </div>
   </section>
 
-  <!-- SERVIÇOS -->
   <section id="servicos">
     <div class="servicos-header reveal">
       <div class="section-label">Nossos Serviços</div>
@@ -1775,6 +1810,10 @@
       <div class="servico-card reveal" style="background-image: url('images/implantes.jpg');">
         <h3 class="servico-title">Implantes Dentários</h3>
         <p class="servico-desc">Reabilitação oral completa com implantes de titânio para devolver função e estética com naturalidade.</p>
+      </div>
+      <div class="servico-card reveal" style="background-image: url('images/protese-dentaria.jpg');">
+        <h3 class="servico-title">Prótese Dentária</h3>
+        <p class="servico-desc">Soluções recuperam seu sorriso, devolvendo conforto, estética e qualidade de vida com naturalidade.</p>
       </div>
       <div class="servico-card reveal" style="background-image: url('images/ortodontia.jpg');">
         <h3 class="servico-title">Ortodontia</h3>
@@ -1795,7 +1834,6 @@
     </div>
   </section>
 
-  <!-- DEPOIMENTOS -->
   <section id="depoimentos">
     <div class="dep-bg"></div>
     <div class="reveal">
@@ -1903,7 +1941,7 @@
             </div>
             <div class="contact-item-info">
               <strong>Horário de Funcionamento</strong>
-              <span>Seg–Sex 8h–19h · Sáb 8h–13h</span>
+              <span>Seg–Sex 8h–19h<br>Sáb 8h–13h</span>
             </div>
           </div>
         </div>
@@ -1939,7 +1977,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-top">
       <div class="footer-brand">
@@ -1999,7 +2036,6 @@
   </footer>
 
   <script>
-    // ─── HAMBURGER MENU ──────────────────────────────
     function toggleMenu() {
       const menu = document.getElementById('mobileMenu');
       const btn = document.getElementById('hamburger');
@@ -2013,20 +2049,17 @@
       document.body.style.overflow = '';
     }
 
-    // ─── NAVBAR SCROLL ───────────────────────────────
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 60);
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
     });
 
-    // ─── REVEAL ON SCROLL ────────────────────────────
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
     }, { threshold: 0.12 });
     reveals.forEach(r => observer.observe(r));
 
-    // ─── DEPOIMENTOS SLIDER ──────────────────────────
     const track = document.getElementById('depTrack');
     const controls = document.getElementById('depControls');
     let currentDep = 0;
@@ -2068,7 +2101,6 @@
       goTo(0);
     });
 
-    // ─── COUNTER ANIMATION ───────────────────────────
     function animateCounter(el, target, suffix, color) {
       let start = 0; const dur = 1800;
       const step = timestamp => {
@@ -2097,12 +2129,11 @@
 
     function submitForm() {
       const nome = document.getElementById('f-nome').value.trim();
-      const tel = document.getElementById('f-tel').value.trim();
       const servico = document.getElementById('f-servico').value;
       const msg = document.getElementById('f-msg').value.trim();
 
-      if (!nome || !tel) {
-        alert('Por favor, preencha pelo menos nome e telefone.');
+      if (!nome) {
+        alert('Por favor, preencha seu nome.');
         return;
       }
 
@@ -2123,7 +2154,6 @@
         btn.style.display = 'none';
         document.querySelector('.form-note').style.display = 'none';
         document.getElementById('formSuccess').style.display = 'block';
-        // Reset form after 4s
         setTimeout(() => {
           document.getElementById('f-nome').value = '';
           document.getElementById('f-servico').value = '';
