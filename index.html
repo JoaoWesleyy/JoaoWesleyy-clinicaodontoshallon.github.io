@@ -921,6 +921,25 @@
 
     #contato {
       background: var(--white-warm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #contato::before {
+      content: 'SHALLON';
+      position: absolute;
+      left: -45vw;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-display);
+      font-size: 22vw;
+      font-weight: 700;
+      color: rgba(14, 58, 110, 0.075);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      pointer-events: none;
+      user-select: none;
+      animation: shallonWatermark 18s linear infinite;
     }
 
     .contato-grid {
@@ -928,6 +947,8 @@
       grid-template-columns: 1fr 1.4fr;
       gap: 80px;
       align-items: start;
+      position: relative;
+      z-index: 1;
     }
 
     .contato-info {
@@ -1620,6 +1641,10 @@
       #servicos::before {
         font-size: 34vw;
       }
+
+      #contato::before {
+        font-size: 34vw;
+      }
     }
 
     @media (max-width: 400px) {
@@ -1953,6 +1978,10 @@
           <input type="text" placeholder="Seu nome" id="f-nome" />
         </div>
         <div class="form-group">
+          <label>Endereço</label>
+          <input type="text" placeholder="Seu endereço" id="f-endereco" />
+        </div>
+        <div class="form-group">
           <label>Serviço de Interesse</label>
           <select id="f-servico">
             <option value="">Selecione...</option>
@@ -2129,6 +2158,7 @@
 
     function submitForm() {
       const nome = document.getElementById('f-nome').value.trim();
+      const endereco = document.getElementById('f-endereco').value.trim();
       const servico = document.getElementById('f-servico').value;
       const msg = document.getElementById('f-msg').value.trim();
 
@@ -2140,8 +2170,9 @@
       const NUMERO_CLINICA = '5569992314977';
 
       const texto =
-        `*Seja muito bem-vindo a clínica Shallon. Em breve um atendente entrará em contato.*%0A%0A` +
+        `*Meus dados para agendar minha consulta.*%0A%0A` +
         `*Nome:* ${encodeURIComponent(nome)}%0A` +
+        `*Endereço:* ${encodeURIComponent(endereco || 'Não informado')}%0A` +
         `*Serviço:* ${encodeURIComponent(servico || 'Não selecionado')}%0A` +
         `*Mensagem:* ${encodeURIComponent(msg || 'Sem mensagem adicional')}`;
 
@@ -2156,6 +2187,7 @@
         document.getElementById('formSuccess').style.display = 'block';
         setTimeout(() => {
           document.getElementById('f-nome').value = '';
+          document.getElementById('f-endereco').value = '';
           document.getElementById('f-servico').value = '';
           document.getElementById('f-msg').value = '';
           btn.textContent = 'Enviar Mensagem';
