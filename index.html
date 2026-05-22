@@ -923,6 +923,7 @@
       background: var(--white-warm);
       position: relative;
       overflow: hidden;
+      text-align: center;
     }
 
     #contato::before {
@@ -943,20 +944,29 @@
     }
 
     .contato-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 80px;
-      align-items: start;
+      display: flex;
+      justify-content: center;
       position: relative;
       z-index: 1;
     }
 
     .contato-info {
       padding-top: 12px;
+      max-width: 780px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
 
     .contato-info .section-title {
       margin-bottom: 24px;
+    }
+
+    #contato .section-label {
+      align-self: stretch;
+      transform: translateX(calc((780px - 100vw + 120px) / 2));
     }
 
     .contato-info p {
@@ -970,12 +980,19 @@
       display: flex;
       flex-direction: column;
       gap: 22px;
+      align-items: center;
+      width: 100%;
+      max-width: 520px;
+      margin-bottom: 18px;
     }
 
     .contact-item {
       display: flex;
       align-items: center;
+      justify-content: flex-start;
       gap: 16px;
+      width: 100%;
+      text-align: left;
     }
 
     .contact-icon {
@@ -1006,73 +1023,22 @@
     }
 
     .contact-item-info span {
+      display: block;
       font-size: 1.1rem;
       color: var(--blue-deep);
       font-weight: 400;
       line-height: 1.5;
     }
 
-    .contato-form {
-      background: var(--white);
-      border-radius: 24px;
-      padding: 42px;
-      box-shadow: 0 20px 60px rgba(10, 31, 60, 0.07);
-      display: flex;
-      flex-direction: column;
+    .contact-cta {
+      width: auto;
+      min-width: min(100%, 340px);
+      display: inline-flex;
       align-items: center;
-      margin-top: 15px;
-    }
-
-    .contato-form .form-group,
-    .contato-form .form-row {
-      width: 100%;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      width: 100%;
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      color: var(--blue-deep);
-      background: var(--white-warm);
-      border: 1.5px solid rgba(14, 58, 110, 0.1);
-      border-radius: 12px;
-      padding: 14px 18px;
-      outline: none;
-      resize: none;
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-      border-color: var(--blue-soft);
-      box-shadow: 0 0 0 4px rgba(26, 94, 168, 0.08);
-    }
-
-    .form-group textarea {
-      min-height: 130px;
+      justify-content: center;
+      margin-top: 38px;
+      padding-left: 30px;
+      padding-right: 30px;
     }
 
     .form-submit {
@@ -1088,30 +1054,15 @@
       border: none;
       border-radius: 50px;
       cursor: pointer;
+      text-decoration: none;
       transition: transform 0.3s var(--ease-spring), box-shadow 0.3s;
-      margin-top: 8px;
+      margin-top: 15px;
     }
 
     .form-submit:hover {
       transform: translateY(-3px);
       box-shadow: 0 14px 36px rgba(14, 58, 110, 0.28);
-    }
-
-    .form-note {
-      text-align: center;
-      margin-top: 16px;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    .form-success {
-      display: none;
-      text-align: center;
-      padding: 20px;
-      color: var(--blue-soft);
-      font-size: 1rem;
-      font-family: var(--font-display);
-      font-style: italic;
+      text-decoration: none;
     }
 
     footer {
@@ -1590,15 +1541,6 @@
         font-size: 0.88rem;
       }
 
-      .contato-form {
-        padding: 24px 16px;
-      }
-
-      .form-row {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
       .footer-top {
         flex-direction: column;
         gap: 24px;
@@ -1642,8 +1584,9 @@
         font-size: 34vw;
       }
 
-      #contato::before {
-        font-size: 34vw;
+      #contato .section-label {
+        transform: none;
+        align-self: flex-start;
       }
     }
 
@@ -1853,7 +1796,7 @@
         <p class="servico-desc">Tratamento das gengivas com técnicas avançadas para garantir uma base saudável ao seu sorriso.</p>
       </div>
       <div class="servico-card reveal" style="background-image: url('images/pediatrica.jpg');">
-        <h3 class="servico-title">Odonto Pediátrica</h3>
+        <h3 class="servico-title">Odontopediátrica</h3>
         <p class="servico-desc">Atendimento especializado para crianças, criando uma relação positiva com o dentista desde cedo.</p>
       </div>
     </div>
@@ -1970,39 +1913,11 @@
             </div>
           </div>
         </div>
+        <a class="form-submit contact-cta" href="https://wa.me/5569992314977?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20minha%20consulta." target="_blank" rel="noopener">
+          Realizar agendamento de consulta
+        </a>
       </div>
 
-      <div class="contato-form reveal" style="transition-delay:0.2s" id="contactForm">
-        <div class="form-group">
-          <label>Nome</label>
-          <input type="text" placeholder="Seu nome" id="f-nome" />
-        </div>
-        <div class="form-group">
-          <label>Endereço</label>
-          <input type="text" placeholder="Seu endereço" id="f-endereco" />
-        </div>
-        <div class="form-group">
-          <label>Serviço de Interesse</label>
-          <select id="f-servico">
-            <option value="">Selecione...</option>
-            <option>Odontologia Estética</option>
-            <option>Implantes Dentários</option>
-            <option>Ortodontia</option>
-            <option>Clínica Geral</option>
-            <option>Periodontia</option>
-            <option>Odonto Pediátrica</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Mensagem</label>
-          <textarea placeholder="Como podemos ajudar?" id="f-msg"></textarea>
-        </div>
-        <button class="form-submit" onclick="submitForm()">Enviar Mensagem</button>
-        <p class="form-note">Você será redirecionado ao WhatsApp para enviar a mensagem.</p>
-        <div class="form-success" id="formSuccess">
-          ✓ WhatsApp aberto! Envie a mensagem e entraremos em contato em breve.
-        </div>
-      </div>
     </div>
   </section>
 
@@ -2024,17 +1939,20 @@
       <div class="footer-links">
         <h5>Serviços</h5>
         <ul>
-          <li><a href="#">Odontologia Estética</a></li>
-          <li><a href="#">Implantes</a></li>
-          <li><a href="#">Ortodontia</a></li>
-          <li><a href="#">Clínica Geral</a></li>
+          <li><a href="#servicos">Odontologia Estética</a></li>
+          <li><a href="#servicos">Implantes</a></li>
+          <li><a href="#servicos">Ortodontia</a></li>
+          <li><a href="#servicos">Clínica Geral</a></li>
+          <li><a href="#servicos">Prótese dentaria</a></li>
+          <li><a href="#servicos">Periodontia</a></li>
+          <li><a href="#servicos">Odontopediátrica</a></li>
         </ul>
       </div>
       <div class="footer-links">
         <h5>Contato</h5>
         <ul>
-          <li><a href="#">(69) 9 9231-4977</a></li>
-          <li><a href="#">Rua Victor Ferreira Manahiba, 695 - Agenor de Carvalho</a></li>
+          <li><a href="https://api.whatsapp.com/send/?phone=5569992314977&text&type=phone_number&app_absent=0">(69) 9 9231-4977</a></li>
+          <li><a href="https://www.google.com/maps/place/SHALLON+ODONTOLOGIA+E+PR%C3%93TESE/data=!4m2!3m1!1s0x0:0x27ffcc48ca4f890f?sa=X&ved=1t:2428&ictx=111">Rua Victor Ferreira Manahiba, 695 - Agenor de Carvalho</a></li>
         </ul>
       </div>
     </div>
@@ -2051,13 +1969,6 @@
         <a href="https://www.facebook.com/shallonodontologiaeprotese" class="social-btn" aria-label="Facebook">
           <svg viewBox="0 0 24 24">
             <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-          </svg>
-        </a>
-        <a href="#" class="social-btn" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-            <rect x="2" y="9" width="4" height="12" />
-            <circle cx="4" cy="4" r="2" />
           </svg>
         </a>
       </div>
@@ -2155,49 +2066,6 @@
     }, { threshold: 0.3 });
     const heroCard = document.querySelector('.hero-card');
     if (heroCard) statsObs.observe(heroCard);
-
-    function submitForm() {
-      const nome = document.getElementById('f-nome').value.trim();
-      const endereco = document.getElementById('f-endereco').value.trim();
-      const servico = document.getElementById('f-servico').value;
-      const msg = document.getElementById('f-msg').value.trim();
-
-      if (!nome) {
-        alert('Por favor, preencha seu nome.');
-        return;
-      }
-
-      const NUMERO_CLINICA = '5569992314977';
-
-      const texto =
-        `*Meus dados para agendar minha consulta.*%0A%0A` +
-        `*Nome:* ${encodeURIComponent(nome)}%0A` +
-        `*Endereço:* ${encodeURIComponent(endereco || 'Não informado')}%0A` +
-        `*Serviço:* ${encodeURIComponent(servico || 'Não selecionado')}%0A` +
-        `*Mensagem:* ${encodeURIComponent(msg || 'Sem mensagem adicional')}`;
-
-      const btn = document.querySelector('.form-submit');
-      btn.textContent = 'Abrindo WhatsApp...';
-      btn.disabled = true;
-
-      setTimeout(() => {
-        window.open(`https://wa.me/${NUMERO_CLINICA}?text=${texto}`, '_blank');
-        btn.style.display = 'none';
-        document.querySelector('.form-note').style.display = 'none';
-        document.getElementById('formSuccess').style.display = 'block';
-        setTimeout(() => {
-          document.getElementById('f-nome').value = '';
-          document.getElementById('f-endereco').value = '';
-          document.getElementById('f-servico').value = '';
-          document.getElementById('f-msg').value = '';
-          btn.textContent = 'Enviar Mensagem';
-          btn.disabled = false;
-          btn.style.display = 'block';
-          document.querySelector('.form-note').style.display = 'block';
-          document.getElementById('formSuccess').style.display = 'none';
-        }, 4000);
-      }, 600);
-    }
 
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
