@@ -37,6 +37,7 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 88px;
     }
 
     body {
@@ -366,10 +367,10 @@
     }
 
     .btn-primary:hover {
-      background: var(--gold);
+      background: var(--blue-soft);
       color: var(--white);
       transform: translateY(-3px);
-      box-shadow: 0 16px 40px rgba(196, 169, 106, 0.35);
+      box-shadow: 0 16px 40px rgba(26, 94, 168, 0.36);
     }
 
     .btn-outline {
@@ -382,11 +383,15 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      transition: color 0.3s;
+      padding: 10px 18px 10px 10px;
+      border-radius: 50px;
+      transition: color 0.3s, background 0.3s, transform 0.3s var(--ease-spring);
     }
 
     .btn-outline:hover {
-      color: var(--gold);
+      background: var(--blue-soft);
+      color: var(--white);
+      transform: translateY(-3px);
     }
 
     .btn-outline .play-icon {
@@ -401,7 +406,7 @@
     }
 
     .btn-outline:hover .play-icon {
-      border-color: var(--gold);
+      border-color: rgba(255, 255, 255, 0.8);
     }
 
     .play-icon svg {
@@ -552,6 +557,7 @@
 
     section {
       padding: 80px 60px;
+      scroll-margin-top: 88px;
     }
 
     .section-label {
@@ -604,6 +610,7 @@
       background-size: 24px 24px;
       position: relative;
       overflow: hidden;
+      padding-top: 46px;
       padding-bottom: 72px;
     }
 
@@ -1107,13 +1114,13 @@
       background-color: var(--blue-deep);
       background-image:
         radial-gradient(circle at 15% 25%, rgba(59, 130, 212, 0.38) 0%, transparent 52%),
-        radial-gradient(circle at 85% 75%, rgba(196, 169, 106, 0.14) 0%, transparent 42%),
         radial-gradient(circle at 50% 50%, rgba(14, 58, 110, 0.6) 0%, transparent 70%),
         radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-      background-size: auto, auto, auto, 28px 28px;
+      background-size: auto, auto, 28px 28px;
       position: relative;
       overflow: hidden;
       box-sizing: border-box;
+      padding-top: 44px;
     }
 
     #depoimentos .section-label {
@@ -1139,11 +1146,23 @@
       color: var(--blue-pale);
     }
 
+    .depoimentos-title-light {
+      display: block;
+      font-weight: 200;
+      font-size: 0.82em;
+      letter-spacing: 0.06em;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .depoimentos-title-bold {
+      display: block;
+      font-weight: 800;
+      font-size: 1.18em;
+      font-style: italic;
+      color: var(--blue-pale);
+    }
+
     .highlight-dep {
-      background: linear-gradient(120deg, rgba(196, 169, 106, 0.5) 0%, rgba(196, 169, 106, 0.5) 100%);
-      background-repeat: no-repeat;
-      background-size: 100% 45%;
-      background-position: 0 85%;
       padding: 0 3px;
     }
 
@@ -1155,7 +1174,7 @@
       left: 60px;
       right: 60px;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(196, 169, 106, 0.5) 30%, rgba(59, 130, 212, 0.5) 70%, transparent);
+      background: linear-gradient(90deg, transparent, rgba(59, 130, 212, 0.5) 50%, transparent);
     }
 
     .dep-bg {
@@ -1199,10 +1218,9 @@
       background-color: var(--blue-deep);
       background-image:
         radial-gradient(circle at 15% 25%, rgba(59, 130, 212, 0.38) 0%, transparent 52%),
-        radial-gradient(circle at 85% 75%, rgba(196, 169, 106, 0.14) 0%, transparent 42%),
         radial-gradient(circle at 50% 50%, rgba(14, 58, 110, 0.6) 0%, transparent 70%),
         radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-      background-size: auto, auto, auto, 28px 28px;
+      background-size: auto, auto, 28px 28px;
     }
 
     .dep-card {
@@ -1675,6 +1693,32 @@
       transition: color 0.3s;
     }
 
+    .footer-contact-link {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.55;
+    }
+
+    .footer-contact-icon {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+      margin-top: 2px;
+      color: var(--white);
+    }
+
+    .footer-contact-icon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
     .footer-links a:hover {
       color: var(--gold);
     }
@@ -2040,7 +2084,7 @@
       }
 
       #depoimentos {
-        padding: 90px 18px;
+        padding: 54px 18px 72px;
       }
 
       .dep-slider-wrap {
@@ -2421,7 +2465,10 @@
     <div class="dep-bg"></div>
     <div class="reveal">
       <div class="section-label">Depoimentos</div>
-      <h2 class="section-title">O que nossos<br><em><span class="highlight-dep">pacientes</span> dizem</em></h2>
+      <h2 class="section-title">
+        <span class="depoimentos-title-light">O que nossos</span>
+        <em class="depoimentos-title-bold"><span class="highlight-dep">pacientes dizem</span></em>
+      </h2>
     </div>
     <div class="dep-slider-wrap reveal" style="transition-delay:0.2s">
       <div class="dep-track" id="depTrack">
@@ -2616,9 +2663,30 @@
       <div class="footer-links">
         <h5>Contato</h5>
         <ul>
-          <li><a href="https://api.whatsapp.com/send/?phone=5569992314977&text&type=phone_number&app_absent=0">📞 (69) 9 9231-4977</a></li>
-          <li><a href="https://www.google.com/maps/place/SHALLON+ODONTOLOGIA+E+PR%C3%93TESE/data=!4m2!3m1!1s0x0:0x27ffcc48ca4f890f?sa=X&ved=1t:2428&ictx=111">📍 Rua Victor Ferreira Manahiba, 695</a></li>
-          <li><a href="#contato">🕐 Seg–Sex 8h–19h · Sáb 8h–13h</a></li>
+          <li>
+            <a href="https://api.whatsapp.com/send/?phone=5569992314977&text&type=phone_number&app_absent=0" class="footer-contact-link">
+              <span class="footer-contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 14 19.79 19.79 0 0 1 1.61 5.42C1.6 4.32 2.42 3.4 3.52 3H6.5a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.7a16 16 0 0 0 6 6l1.06-1.06a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+              </span>
+              <span>(69) 9 9231-4977</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.google.com/maps/place/SHALLON+ODONTOLOGIA+E+PR%C3%93TESE/data=!4m2!3m1!1s0x0:0x27ffcc48ca4f890f?sa=X&ved=1t:2428&ictx=111" class="footer-contact-link">
+              <span class="footer-contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
+              </span>
+              <span>Rua Victor Ferreira Manahiba, 695</span>
+            </a>
+          </li>
+          <li>
+            <a href="#contato" class="footer-contact-link">
+              <span class="footer-contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+              </span>
+              <span>Seg-Sex 8h-19h · Sab 8h-13h</span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
