@@ -37,7 +37,6 @@
 
     html {
       scroll-behavior: smooth;
-      scrollbar-color: var(--blue-light) var(--blue-pale);
     }
 
     body {
@@ -48,33 +47,11 @@
       overflow-x: hidden;
     }
 
-    ::-webkit-scrollbar-thumb {
-      background: var(--blue-light);
-      border-radius: 0;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--blue-pale);
-    }
-
-    ::-webkit-scrollbar-button {
-      width: 0;
-      height: 0;
-      display: none;
-    }
-
-    ::-webkit-scrollbar-button:start:decrement,
-    ::-webkit-scrollbar-button:end:increment {
-      width: 0;
-      height: 0;
-      display: none;
-    }
-
 
 
     nav {
       position: fixed;
-      top: 5px;
+      top: 0;
       width: 100%;
       z-index: 100;
       padding: 5px 60px;
@@ -90,24 +67,6 @@
     nav.scrolled {
       background: rgba(255, 255, 255, 0.82);
       box-shadow: 0 2px 24px rgba(10, 31, 60, 0.06);
-    }
-
-    .scroll-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      z-index: 120;
-      background: rgba(208, 230, 249, 0.92);
-      pointer-events: none;
-    }
-
-    .scroll-progress-bar {
-      width: 0;
-      height: 100%;
-      background: linear-gradient(90deg, var(--blue-light), var(--blue-soft));
-      transition: width 0.16s ease;
     }
 
     .logo {
@@ -407,10 +366,10 @@
     }
 
     .btn-primary:hover {
-      background: var(--blue-soft);
+      background: var(--gold);
       color: var(--white);
       transform: translateY(-3px);
-      box-shadow: 0 16px 40px rgba(26, 94, 168, 0.36);
+      box-shadow: 0 16px 40px rgba(196, 169, 106, 0.35);
     }
 
     .btn-outline {
@@ -418,41 +377,37 @@
       font-weight: 500;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--blue-deep);
-      background: var(--white);
+      color: rgba(255, 255, 255, 0.82);
       text-decoration: none;
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 16px 28px;
-      border-radius: 50px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
-      transition: color 0.3s, background 0.3s, transform 0.3s var(--ease-spring), box-shadow 0.3s;
+      transition: color 0.3s;
     }
 
     .btn-outline:hover {
-      background: var(--blue-soft);
-      color: var(--white);
-      transform: translateY(-3px);
-      box-shadow: 0 16px 40px rgba(26, 94, 168, 0.36);
+      color: var(--gold);
     }
 
     .btn-outline .play-icon {
-      width: 18px;
-      height: 18px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: border-color 0.3s;
+    }
+
+    .btn-outline:hover .play-icon {
+      border-color: var(--gold);
     }
 
     .play-icon svg {
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      width: 18px;
+      fill: currentColor;
+      margin-left: 3px;
+      width: 12px;
     }
 
     .hero-card {
@@ -479,7 +434,7 @@
       position: relative;
     }
 
-    .hero-stat + .hero-stat::before {
+    .hero-stat+.hero-stat::before {
       content: '';
       position: absolute;
       left: 0;
@@ -597,7 +552,6 @@
 
     section {
       padding: 80px 60px;
-      scroll-margin-top: 0;
     }
 
     .section-label {
@@ -650,7 +604,6 @@
       background-size: 24px 24px;
       position: relative;
       overflow: hidden;
-      padding-top: 40px;
       padding-bottom: 72px;
     }
 
@@ -830,8 +783,15 @@
     }
 
     @keyframes sobreFadeIn {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .feature-row {
@@ -895,7 +855,7 @@
       background-size: 24px 24px;
       position: relative;
       overflow: hidden;
-      padding-top: 96px;
+      padding-top: 36px;
     }
 
     #servicos::before {
@@ -1116,7 +1076,7 @@
       font-size: 1.25rem;
       font-weight: 800;
       color: #ffffff;
-      text-shadow: 0 2px 14px rgba(0,0,0,0.6);
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
       margin-bottom: 8px;
       padding-top: 16px;
       line-height: 1.2;
@@ -1142,7 +1102,7 @@
       font-size: 0.82rem;
       line-height: 1.65;
       color: rgba(255, 255, 255, 0.82);
-      text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
       font-weight: 300;
       letter-spacing: 0.02em;
       transition: color 0.4s;
@@ -1154,13 +1114,13 @@
       background-color: var(--blue-deep);
       background-image:
         radial-gradient(circle at 15% 25%, rgba(59, 130, 212, 0.38) 0%, transparent 52%),
+        radial-gradient(circle at 85% 75%, rgba(196, 169, 106, 0.14) 0%, transparent 42%),
         radial-gradient(circle at 50% 50%, rgba(14, 58, 110, 0.6) 0%, transparent 70%),
         radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-      background-size: auto, auto, 28px 28px;
+      background-size: auto, auto, auto, 28px 28px;
       position: relative;
       overflow: hidden;
       box-sizing: border-box;
-      padding-top: 50px;
     }
 
     #depoimentos .section-label {
@@ -1186,23 +1146,11 @@
       color: var(--blue-pale);
     }
 
-    .depoimentos-title-light {
-      display: block;
-      font-weight: 200;
-      font-size: 0.82em;
-      letter-spacing: 0.06em;
-      color: rgba(255, 255, 255, 0.72);
-    }
-
-    .depoimentos-title-bold {
-      display: block;
-      font-weight: 800;
-      font-size: 1.18em;
-      font-style: italic;
-      color: var(--blue-pale);
-    }
-
     .highlight-dep {
+      background: linear-gradient(120deg, rgba(196, 169, 106, 0.5) 0%, rgba(196, 169, 106, 0.5) 100%);
+      background-repeat: no-repeat;
+      background-size: 100% 45%;
+      background-position: 0 85%;
       padding: 0 3px;
     }
 
@@ -1214,7 +1162,7 @@
       left: 60px;
       right: 60px;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(59, 130, 212, 0.5) 50%, transparent);
+      background: linear-gradient(90deg, transparent, rgba(196, 169, 106, 0.5) 30%, rgba(59, 130, 212, 0.5) 70%, transparent);
     }
 
     .dep-bg {
@@ -1258,9 +1206,10 @@
       background-color: var(--blue-deep);
       background-image:
         radial-gradient(circle at 15% 25%, rgba(59, 130, 212, 0.38) 0%, transparent 52%),
+        radial-gradient(circle at 85% 75%, rgba(196, 169, 106, 0.14) 0%, transparent 42%),
         radial-gradient(circle at 50% 50%, rgba(14, 58, 110, 0.6) 0%, transparent 70%),
         radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-      background-size: auto, auto, 28px 28px;
+      background-size: auto, auto, auto, 28px 28px;
     }
 
     .dep-card {
@@ -1268,9 +1217,9 @@
       max-width: calc((100vw - 176px) / 3);
       scroll-snap-align: start;
       box-sizing: border-box;
-      background: linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
       backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-top: 2px solid var(--gold);
       border-radius: 20px;
       padding: 40px 36px 32px;
@@ -1298,9 +1247,17 @@
       border-top-color: rgba(196, 169, 106, 0.9);
     }
 
-    .dep-stars { display: none; }
-    .dep-avatar { display: none; }
-    .dep-role   { display: none; }
+    .dep-stars {
+      display: none;
+    }
+
+    .dep-avatar {
+      display: none;
+    }
+
+    .dep-role {
+      display: none;
+    }
 
     .dep-text {
       font-family: var(--font-display);
@@ -1317,7 +1274,7 @@
       align-items: center;
       gap: 12px;
       padding-top: 20px;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .dep-name {
@@ -1325,7 +1282,7 @@
       font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.75);
+      color: rgba(255, 255, 255, 0.75);
     }
 
     .dep-role {
@@ -1357,7 +1314,6 @@
       background-size: 24px 24px;
       position: relative;
       overflow: hidden;
-      padding-top: 96px;
       padding-bottom: 120px;
     }
 
@@ -1627,7 +1583,7 @@
       gap: 12px;
       padding: 0 32px;
       white-space: nowrap;
-      border-right: 1px solid rgba(255,255,255,0.25);
+      border-right: 1px solid rgba(255, 255, 255, 0.25);
     }
 
     .ticker-logo {
@@ -1648,8 +1604,13 @@
     }
 
     @keyframes ticker-scroll {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
     }
 
     footer {
@@ -1732,32 +1693,6 @@
       color: rgba(255, 255, 255, 0.55);
       text-decoration: none;
       transition: color 0.3s;
-    }
-
-    .footer-contact-link {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      line-height: 1.55;
-    }
-
-    .footer-contact-icon {
-      width: 18px;
-      height: 18px;
-      flex: 0 0 18px;
-      margin-top: 2px;
-      color: rgba(255, 255, 255, 0.55);
-    }
-
-    .footer-contact-icon svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
     }
 
     .footer-links a:hover {
@@ -2125,7 +2060,7 @@
       }
 
       #depoimentos {
-        padding: 40px 18px 72px;
+        padding: 90px 18px;
       }
 
       .dep-slider-wrap {
@@ -2306,9 +2241,6 @@
       <span></span><span></span><span></span>
     </div>
   </nav>
-  <div class="scroll-progress" id="scrollProgress" aria-hidden="true">
-    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
-  </div>
 
   <section id="hero">
     <div class="hero-bg-pattern"></div>
@@ -2336,9 +2268,8 @@
         <a href="#contato" class="btn-primary">Agendar Consulta</a>
         <a href="https://www.google.com/maps/place/SHALLON+ODONTOLOGIA+E+PR%C3%93TESE/@-8.7665788,-63.8629672,17z/data=!3m1!4b1!4m6!3m5!1s0x92325b5fee199369:0x27ffcc48ca4f890f!8m2!3d-8.7665788!4d-63.8629672!16s%2Fg%2F1ptxfbskd?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" class="btn-outline">
           <span class="play-icon">
-            <svg viewBox="0 0 24 24">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-              <circle cx="12" cy="10" r="3" />
+            <svg viewBox="0 0 10 12">
+              <polygon points="0,0 10,6 0,12" />
             </svg>
           </span>
           Conheça a Clínica
@@ -2497,11 +2428,15 @@
 
     <div class="servicos-nav">
       <button class="serv-btn" id="servPrev" aria-label="Anterior">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
       </button>
       <div class="serv-dots" id="servDots"></div>
       <button class="serv-btn" id="servNext" aria-label="Próximo">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
       </button>
     </div>
   </section>
@@ -2510,10 +2445,7 @@
     <div class="dep-bg"></div>
     <div class="reveal">
       <div class="section-label">Depoimentos</div>
-      <h2 class="section-title">
-        <span class="depoimentos-title-light">O que nossos</span>
-        <em class="depoimentos-title-bold"><span class="highlight-dep">pacientes dizem</span></em>
-      </h2>
+      <h2 class="section-title">O que nossos<br><em><span class="highlight-dep">pacientes</span> dizem</em></h2>
     </div>
     <div class="dep-slider-wrap reveal" style="transition-delay:0.2s">
       <div class="dep-track" id="depTrack">
@@ -2609,7 +2541,7 @@
           <span class="contato-title-light">Vamos marcar sua</span>
           <strong class="contato-title-bold">Consulta?</strong>
         </h2>
-  
+
         <div class="contact-items">
           <div class="contact-item">
             <div class="contact-icon">
@@ -2660,7 +2592,9 @@
           </h3>
           <p class="booking-desc">Dê o primeiro passo para o sorriso que você sempre quis. Fale com nossa equipe agora pelo WhatsApp e marque sua consulta em minutos.</p>
           <a href="https://wa.me/5569992314977?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20minha%20consulta." class="booking-btn" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.52 3.48A11.89 11.89 0 0012.05.01C5.46.01.14 5.33.14 11.93c0 2.1.55 4.15 1.59 5.96L.1 24l6.28-1.65a11.9 11.9 0 005.67 1.44h.01c6.58 0 11.9-5.33 11.9-11.93 0-3.18-1.24-6.17-3.49-8.43zm-8.47 18.34h-.01a9.88 9.88 0 01-5.04-1.37l-.36-.21-3.73.98 1-3.63-.24-.37a9.85 9.85 0 01-1.51-5.3c0-5.44 4.43-9.87 9.88-9.87 2.64 0 5.12 1.03 6.98 2.9a9.81 9.81 0 012.89 6.98c-.01 5.44-4.43 9.89-9.86 9.89zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.04-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.09 3.19 5.06 4.47.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.19-.57-.33z"/></svg>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.52 3.48A11.89 11.89 0 0012.05.01C5.46.01.14 5.33.14 11.93c0 2.1.55 4.15 1.59 5.96L.1 24l6.28-1.65a11.9 11.9 0 005.67 1.44h.01c6.58 0 11.9-5.33 11.9-11.93 0-3.18-1.24-6.17-3.49-8.43zm-8.47 18.34h-.01a9.88 9.88 0 01-5.04-1.37l-.36-.21-3.73.98 1-3.63-.24-.37a9.85 9.85 0 01-1.51-5.3c0-5.44 4.43-9.87 9.88-9.87 2.64 0 5.12 1.03 6.98 2.9a9.81 9.81 0 012.89 6.98c-.01 5.44-4.43 9.89-9.86 9.89zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.04-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.09 3.19 5.06 4.47.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.19-.57-.33z" />
+            </svg>
             Agendar pelo WhatsApp
           </a>
         </div>
@@ -2671,11 +2605,11 @@
 
   <footer>
     <div class="footer-tagline">
-      <span class="footer-tagline-emoji">🦷</span>
+      <span class="footer-tagline-emoji"></span>
       <span class="footer-tagline-dot"></span>
       Transformando sorrisos
       <span class="footer-tagline-dot"></span>
-      <span class="footer-tagline-emoji">🦷</span>
+      <span class="footer-tagline-emoji"></span>
 
     </div>
 
@@ -2708,30 +2642,9 @@
       <div class="footer-links">
         <h5>Contato</h5>
         <ul>
-          <li>
-            <a href="https://api.whatsapp.com/send/?phone=5569992314977&text&type=phone_number&app_absent=0" class="footer-contact-link">
-              <span class="footer-contact-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 14 19.79 19.79 0 0 1 1.61 5.42C1.6 4.32 2.42 3.4 3.52 3H6.5a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.7a16 16 0 0 0 6 6l1.06-1.06a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-              </span>
-              <span>(69) 9 9231-4977</span>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.google.com/maps/place/SHALLON+ODONTOLOGIA+E+PR%C3%93TESE/data=!4m2!3m1!1s0x0:0x27ffcc48ca4f890f?sa=X&ved=1t:2428&ictx=111" class="footer-contact-link">
-              <span class="footer-contact-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
-              </span>
-              <span>Rua Victor Ferreira Manahiba, 695</span>
-            </a>
-          </li>
-          <li>
-            <a href="#contato" class="footer-contact-link">
-              <span class="footer-contact-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
-              </span>
-              <span>Seg-Sex 8h-19h · Sab 8h-13h</span>
-            </a>
-          </li>
+          <li><a href="https://api.whatsapp.com/send/?phone=5569992314977&text&type=phone_number&app_absent=0">(69) 9 9231-4977</a></li>
+          <li><a href="https://www.google.com/maps/place/SHALLON+ODONTOLOGIA+E+PR%C3%93TESE/data=!4m2!3m1!1s0x0:0x27ffcc48ca4f890f?sa=X&ved=1t:2428&ictx=111">Rua Victor Ferreira Manahiba, 695</a></li>
+          <li><a href="#contato">Seg–Sex 8h–19h · Sáb 8h–13h</a></li>
         </ul>
       </div>
     </div>
@@ -2750,7 +2663,7 @@
           </svg>
         </a>
       </div>
-      <p>🦷 © 2025 Shallon Clínica Odontológica. Todos os direitos reservados. ✨</p>
+      <p>© 2025 Shallon Clínica Odontológica. Todos os direitos reservados.</p>
     </div>
   </footer>
 
@@ -2769,22 +2682,9 @@
     }
 
     const navbar = document.getElementById('navbar');
-    const scrollProgress = document.getElementById('scrollProgress');
-    const scrollProgressBar = document.getElementById('scrollProgressBar');
-
-    function updateScrollProgress() {
-      const scrollMax = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = scrollMax > 0 ? (window.scrollY / scrollMax) * 100 : 0;
-      scrollProgressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
-    }
-
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 40);
-      updateScrollProgress();
     });
-    window.addEventListener('resize', updateScrollProgress);
-    window.addEventListener('load', updateScrollProgress);
-    updateScrollProgress();
 
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
