@@ -36,8 +36,8 @@
     }
 
     html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 88px;
+      scroll-behavior: auto;
+      scrollbar-color: var(--blue-light) var(--blue-pale);
     }
 
     body {
@@ -46,6 +46,14 @@
       background: var(--white);
       color: var(--text-main);
       overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--blue-light);
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--blue-pale);
     }
 
 
@@ -68,6 +76,24 @@
     nav.scrolled {
       background: rgba(255, 255, 255, 0.82);
       box-shadow: 0 2px 24px rgba(10, 31, 60, 0.06);
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 78px;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      z-index: 99;
+      background: rgba(208, 230, 249, 0.92);
+      pointer-events: none;
+    }
+
+    .scroll-progress-bar {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue-light), var(--blue-soft));
+      transition: width 0.12s linear;
     }
 
     .logo {
@@ -557,7 +583,7 @@
 
     section {
       padding: 80px 60px;
-      scroll-margin-top: 88px;
+      scroll-margin-top: 0;
     }
 
     .section-label {
@@ -610,7 +636,7 @@
       background-size: 24px 24px;
       position: relative;
       overflow: hidden;
-      padding-top: 46px;
+      padding-top: 96px;
       padding-bottom: 72px;
     }
 
@@ -855,7 +881,7 @@
       background-size: 24px 24px;
       position: relative;
       overflow: hidden;
-      padding-top: 36px;
+      padding-top: 96px;
     }
 
     #servicos::before {
@@ -1120,7 +1146,7 @@
       position: relative;
       overflow: hidden;
       box-sizing: border-box;
-      padding-top: 44px;
+      padding-top: 50px;
     }
 
     #depoimentos .section-label {
@@ -1317,6 +1343,7 @@
       background-size: 24px 24px;
       position: relative;
       overflow: hidden;
+      padding-top: 96px;
       padding-bottom: 120px;
     }
 
@@ -2084,7 +2111,7 @@
       }
 
       #depoimentos {
-        padding: 54px 18px 72px;
+        padding: 40px 18px 72px;
       }
 
       .dep-slider-wrap {
@@ -2265,6 +2292,9 @@
       <span></span><span></span><span></span>
     </div>
   </nav>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true">
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+  </div>
 
   <section id="hero">
     <div class="hero-bg-pattern"></div>
@@ -2724,9 +2754,60 @@
     }
 
     const navbar = document.getElementById('navbar');
+    const scrollProgress = document.getElementById('scrollProgress');
+    const scrollProgressBar = document.getElementById('scrollProgressBar');
+
+    function updateScrollProgress() {
+      const scrollMax = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollMax > 0 ? (window.scrollY / scrollMax) * 100 : 0;
+      scrollProgressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+      scrollProgress.style.top = `${navbar.offsetHeight}px`;
+    }
+
+    function easeInOutCubic(t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    let scrollAnimationFrame = null;
+
+    function slowScrollTo(targetY, duration = 1250) {
+      if (scrollAnimationFrame) cancelAnimationFrame(scrollAnimationFrame);
+      const startY = window.scrollY;
+      const distance = targetY - startY;
+      let startTime = null;
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        window.scrollTo(0, startY + distance * easeInOutCubic(progress));
+        if (progress < 1) {
+          scrollAnimationFrame = requestAnimationFrame(step);
+        } else {
+          scrollAnimationFrame = null;
+        }
+      }
+
+      scrollAnimationFrame = requestAnimationFrame(step);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', event => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (!target) return;
+        event.preventDefault();
+        slowScrollTo(target.offsetTop);
+        history.pushState(null, '', link.getAttribute('href'));
+      });
+    });
+
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 40);
+      updateScrollProgress();
     });
+    window.addEventListener('resize', updateScrollProgress);
+    window.addEventListener('load', updateScrollProgress);
+    updateScrollProgress();
 
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
