@@ -36,7 +36,7 @@
     }
 
     html {
-      scroll-behavior: auto;
+      scroll-behavior: smooth;
       scrollbar-color: var(--blue-light) var(--blue-pale);
     }
 
@@ -2776,63 +2776,6 @@
       const progress = scrollMax > 0 ? (window.scrollY / scrollMax) * 100 : 0;
       scrollProgressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
     }
-
-    function easeInOutCubic(t) {
-      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    }
-
-    let scrollAnimationFrame = null;
-
-    function clampScrollY(value) {
-      const scrollMax = document.documentElement.scrollHeight - window.innerHeight;
-      return Math.min(Math.max(value, 0), Math.max(scrollMax, 0));
-    }
-
-    function animatedScrollTo(targetY, duration = 1250) {
-      if (scrollAnimationFrame) cancelAnimationFrame(scrollAnimationFrame);
-      const startY = window.scrollY;
-      const endY = clampScrollY(targetY);
-      const distance = endY - startY;
-      let startTime = null;
-
-      function step(timestamp) {
-        if (!startTime) startTime = timestamp;
-        const elapsed = timestamp - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        window.scrollTo(0, startY + distance * easeInOutCubic(progress));
-        if (progress < 1) {
-          scrollAnimationFrame = requestAnimationFrame(step);
-        } else {
-          scrollAnimationFrame = null;
-        }
-      }
-
-      scrollAnimationFrame = requestAnimationFrame(step);
-    }
-
-    let wheelTargetY = window.scrollY;
-
-    window.addEventListener('wheel', event => {
-      if (event.ctrlKey || event.shiftKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
-      event.preventDefault();
-      wheelTargetY = clampScrollY(wheelTargetY + event.deltaY * 0.9);
-      animatedScrollTo(wheelTargetY, 720);
-    }, { passive: false });
-
-    window.addEventListener('scroll', () => {
-      if (!scrollAnimationFrame) wheelTargetY = window.scrollY;
-    }, { passive: true });
-
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-      link.addEventListener('click', event => {
-        const target = document.querySelector(link.getAttribute('href'));
-        if (!target) return;
-        event.preventDefault();
-        wheelTargetY = target.offsetTop;
-        animatedScrollTo(target.offsetTop, 1250);
-        history.pushState(null, '', link.getAttribute('href'));
-      });
-    });
 
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 40);
