@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shallonodontologia.com.br/sitemap.xml
